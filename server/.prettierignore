@@ -1,0 +1,33 @@
+# Ignore build output
+dist/
+build/
+
+# Ignore node_modules
+node_modules/
+
+# Ignore logs
+*.log
+
+# Ignore environment files
+.env
+.env.local
+.env.*.local
+
+# Ignore coverage reports
+coverage/
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore specific config files
+*.config.js
+*.config.cjs
+*.config.mjs
+
+# Ignore public assets
+public/
+
+# Ignore database files
+*.sqlite
+*.db
