@@ -58,17 +58,30 @@ passport.use(
           $or: [{ googleId: profile.id }, { email: profile.emails[0].value }],
         });
 
-        // If user doesn't exist, create a new one
+        // If user doesn't exist, create a new one with a unique username
         if (!user) {
+          let baseUsername = profile.displayName
+            .toLowerCase()
+            .replace(/\s+/g, "");
+
+          let existingUser = await User.findOne({ username: baseUsername });
+          let username = baseUsername;
+
+          let counter = 1;
+          while (existingUser) {
+            username = `${baseUsername}${counter}`;
+            existingUser = await User.findOne({ username });
+            counter++;
+          }
+
           user = await User.create({
-            username: profile.displayName,
+            username: username, // unique username
             email: profile.emails[0].value,
             googleId: profile.id,
-            avatar: profile.photos[0].value,
+            profile_picture: profile.photos[0].value,
           });
         }
 
-        // Return the user (existing or newly created)
         return done(null, user);
       } catch (error) {
         console.log("Google authentication error:", error);

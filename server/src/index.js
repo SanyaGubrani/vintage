@@ -10,6 +10,9 @@ connectDb()
       console.log(`The server is running on port: ${PORT}`);
     });
   })
-  .catch((err) => {
-    console.log("Error while running the server:", err);
+  .catch((error) => {
+    console.log(
+      "Failed to start server due to database connection error:",
+      error
+    );
   });
