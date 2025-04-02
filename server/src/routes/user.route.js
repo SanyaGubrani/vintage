@@ -1,10 +1,26 @@
 import { Router } from "express";
-import { getUserProfile } from "../controllers/user.controller.js";
+import {
+  getUserProfile,
+  updateCoverImage,
+  updateProfilePicture,
+  updateUserProfile,
+} from "../controllers/user.controller.js";
 import { isAuthenticated } from "../middlewares/auth.middleware.js";
+import { upload } from "../middlewares/multer.middleware.js";
 
 const router = Router();
 
 // User routes
-router.get("/profile", isAuthenticated, getUserProfile);
+
+router
+  .use(isAuthenticated)
+  .get("/profile", getUserProfile)
+  .post("/updateProfile", updateUserProfile)
+  .post(
+    "/profilePicture",
+    upload.single("profile_picture"),
+    updateProfilePicture
+  )
+  .post("/coverImage", upload.single("cover_image"), updateCoverImage);
 
 export default router;
