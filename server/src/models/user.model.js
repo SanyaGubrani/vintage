@@ -26,7 +26,6 @@ const userSchema = new mongoose.Schema(
 
     password: {
       type: String,
-      required: true,
     },
 
     profile_picture: {
@@ -35,6 +34,15 @@ const userSchema = new mongoose.Schema(
 
     cover_image: {
       type: String,
+    },
+
+    bio: {
+      type: String,
+    },
+
+    googleId: {
+      type: String,
+      sparse: true,
     },
 
     refreshToken: {
