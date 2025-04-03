@@ -10,8 +10,10 @@ import passport from "passport";
 import session from "express-session";
 import authRouter from "./routes/auth.route.js";
 import "./config/passport.js";
-import { isAuthenticated } from "./middlewares/auth.middleware.js";
 import userRouter from "./routes/user.route.js";
+import postRouter from "./routes/post.route.js";
+import likeRouter from "./routes/like.route.js";
+import commentRouter from "./routes/comment.route.js";
 
 // Configurations
 const app = express();
@@ -46,7 +48,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Routes
-app.use("/auth", authRouter);
-app.use("/user", userRouter);
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/post", postRouter);
+app.use("/api/v1/like", likeRouter);
+app.use("/api/v1/comment", commentRouter);
 
 export { app };
