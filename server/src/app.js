@@ -14,6 +14,8 @@ import userRouter from "./routes/user.route.js";
 import postRouter from "./routes/post.route.js";
 import likeRouter from "./routes/like.route.js";
 import commentRouter from "./routes/comment.route.js";
+import savePostRouter from "./routes/savePost.route.js";
+import followRouter from "./routes/follow.route.js";
 
 // Configurations
 const app = express();
@@ -53,5 +55,7 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/post", postRouter);
 app.use("/api/v1/like", likeRouter);
 app.use("/api/v1/comment", commentRouter);
+app.use("/api/v1/save", savePostRouter);
+app.use("/api/v1/follow", followRouter);
 
 export { app };
