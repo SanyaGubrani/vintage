@@ -16,9 +16,11 @@ import likeRouter from "./routes/like.route.js";
 import commentRouter from "./routes/comment.route.js";
 import savePostRouter from "./routes/savePost.route.js";
 import followRouter from "./routes/follow.route.js";
+import messageRouter from "./routes/message.route.js";
+import { app, server } from "./utils/soket.js";
 
 // Configurations
-const app = express();
+// const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
@@ -57,5 +59,6 @@ app.use("/api/v1/like", likeRouter);
 app.use("/api/v1/comment", commentRouter);
 app.use("/api/v1/save", savePostRouter);
 app.use("/api/v1/follow", followRouter);
+app.use("/api/v1/message", messageRouter);
 
 export { app };
