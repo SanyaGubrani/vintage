@@ -1,4 +1,5 @@
 import { app } from "./app.js";
+import { server } from "./utils/soket.js";
 import connectDb from "./db/connectDb.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -6,7 +7,7 @@ dotenv.config();
 connectDb()
   .then(() => {
     const PORT = process.env.PORT || 4080;
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.log(`The server is running on port: ${PORT}`);
     });
   })
