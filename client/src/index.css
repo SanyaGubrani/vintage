@@ -1,2 +1,120 @@
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-xs: 30rem;
+  --breakpoint-2xl: 100rem;
+  --breakpoint-3xl: 120rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-overlay: var(--overlay);
+  --color-success: var(--success);
+}
+
+:root {
+  --background: oklch(0.94 0.03 83.24); /* #f4f1ea */
+  --foreground: oklch(0.21 0.03 333.43); /* #2b2628 */
+  --primary: oklch(0.51 0.07 35.56); /* #775e59 */
+  --primary-foreground: oklch(0.92 0.05 75.75); /* #f2e8dc */
+  --secondary: oklch(0.74 0.11 50.98); /* #c8a99b */
+  --secondary-foreground: oklch(0.35 0.03 30); /* #493f3d */
+  --accent: oklch(0.57 0.12 56.88); /* #936d58 */
+  --accent-foreground: oklch(0.28 0.07 56.88); /* #423229 */
+  --muted: oklch(0.35 0.03 30); /* #493f3d */
+  --muted-foreground: oklch(0.92 0.05 75.75); /* #f2e8dc */
+  --border: oklch(0.57 0.12 56.88 / 0.9); /* #936d58e6 */
+  --destructive: oklch(0.56 0.2 27.54); /* #a54e4e */
+  --ring: oklch(0.51 0.07 35.56); /* #775e59 */
+  --card: oklch(0.94 0.03 83.24); /* #f4f1ea */
+  --card-foreground: oklch(0.21 0.03 333.43); /* #2b2628 */
+  --overlay: oklch(0.21 0.03 333.43 / 0.4); /* rgba(43, 38, 40, 0.4) */
+  --success: oklch(0.7 0.05 123.44); /* #a9b3a0 */
+
+  --shadow-color-accent: rgba(147, 109, 88, 0.4);
+  --shadow-color-mid: rgba(91, 74, 64, 0.2);
+  --shadow-color-edge: rgba(43, 38, 40, 0.15);
+  --grain-opacity: 0.3;
+}
+
+@layer base {
+  body {
+    @apply bg-background;
+
+    box-shadow: inset 0 0 30px 15px var(--shadow-color-accent),
+      inset 0 0 80px 20px var(--shadow-color-mid),
+      inset 0 0 120px 30px var(--shadow-color-edge);
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/images/grain3.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.35;
+    z-index: -1;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+}
+
+@font-face {
+  font-family: "VintageFont";
+  src: url("fonts/jmh_typewriter/JMH\ Typewriter-Bold.ttf") format("truetype"); 
+  font-weight: normal;
+  font-style: normal;
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-secondary-foreground);
+}
+
+.bg-accent {
+  background-color: var(--color-accent);
+  color: var(--color-accent-foreground);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
