@@ -20,6 +20,10 @@ router
 // Google OAuth Routes
 router.get(
   "/google",
+  (req, res, next) => {
+    console.log("Starting Google OAuth flow");
+    next();
+  },
   passport.authenticate("google", {
     scope: ["profile", "email"],
   })
@@ -28,24 +32,28 @@ router.get(
 router.get(
   "/google/callback",
   (req, res, next) => {
+    console.log("Received callback from Google");
     next();
   },
   passport.authenticate("google", {
-    failureRedirect: `${process.env.CORS_ORIGIN}/`,
+    failureRedirect: `${process.env.CORS_ORIGIN}/auth`,
+    // successRedirect: `${process.env.CORS_ORIGIN}/`,
   }),
-  // successRedirect: `${process.env.CORS_ORIGIN}/dashboard`,
+  (req, res) => {
+    console.log("Google authentication successful, redirecting to home");
+    res.redirect(`${process.env.CORS_ORIGIN}/`);
+  }
 
   // Testing:
-  (req, res) => {
-    res.send({
-      id: req.user?._id,
-      username: req.user?.username,
-      email: req.user?.email,
-      googleId: req.user?.googleId,
-      authenticated: req.isAuthenticated(),
-    });
-    
-  }
+  // (req, res) => {
+  //   res.send({
+  //     id: req.user?._id,
+  //     username: req.user?.username,
+  //     email: req.user?.email,
+  //     googleId: req.user?.googleId,
+  //     authenticated: req.isAuthenticated(),
+  //   });
+  // }
 );
 
 router.get("/me", isAuthenticated, (req, res) => {
@@ -54,7 +62,7 @@ router.get("/me", isAuthenticated, (req, res) => {
     username: req.user?.username,
     email: req.user?.email,
     googleId: req.user?.googleId,
-    authenticated: req.isAuthenticated(),
+    authenticated: true,
   });
 });
 
