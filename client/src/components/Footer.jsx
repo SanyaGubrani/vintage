@@ -12,18 +12,12 @@ const Footer = () => {
             <span className="font-newspaper tracking-wider text-xs md:text-sm">
               VINTAGE
             </span>
-            <Circle
-              
-              className="bg-primary/50 size-1 md:size-2.5 rounded-full border-none"
-            />
+            <Circle className="bg-primary/50 size-1 md:size-2.5 rounded-full border-none" />
             <span className="flex text-center md:text-sm text-xs whitespace-nowrap items-center justify-center gap-1 md:gap-1.5">
               <Copyright className="rounded-full border-none size-3 md:size-4" />
               <span className="text-center">2025 Sanya Gubrani</span>
             </span>
-            <Circle
-              
-              className="bg-primary/50 size-1 md:size-2.5 rounded-full border-none"
-            />
+            <Circle className="bg-primary/50 size-1 md:size-2.5 rounded-full border-none" />
             <a
               href="https://github.com/your-username"
               target="_blank"
