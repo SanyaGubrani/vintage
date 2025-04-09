@@ -42,7 +42,10 @@ const App = () => {
             path="/"
             element={authUser ? <Home /> : <Navigate to="/auth" replace />}
           />
-          <Route path="/auth" element={<Auth />} />
+          <Route
+            path="/auth"
+            element={!authUser ? <Auth /> : <Navigate to="/"  />}
+          />
         </Routes>
 
         <Toaster
