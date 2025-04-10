@@ -124,9 +124,9 @@ const getAllPosts = asyncHandler(async (req, res) => {
   }
 
   const posts = await Post.find(query)
-    .sort({ createdAt: -1 }) 
-    .limit(queryLimit + 1) 
-    .populate("user", "username profile_picture");
+    .sort({ createdAt: -1 })
+    .limit(queryLimit + 1)
+    .populate("user", "name username profile_picture");
 
   // Check if there are more posts
   const hasNextPage = posts.length > queryLimit;
@@ -152,7 +152,6 @@ const getAllPosts = asyncHandler(async (req, res) => {
   );
 });
 
-
 const getUserPosts = asyncHandler(async (req, res) => {
   const userId = req.params.userId;
 
@@ -175,7 +174,7 @@ const getUserPosts = asyncHandler(async (req, res) => {
   }
 
   const posts = await Post.find(query)
-    .sort({ createdAt: -1 }) 
+    .sort({ createdAt: -1 })
     .limit(queryLimit + 1)
     .populate("user", "username name profile_picture");
 
