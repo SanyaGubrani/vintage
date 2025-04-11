@@ -36,9 +36,13 @@ const createPost = asyncHandler(async (req, res) => {
     media: mediaUrl,
   });
 
+  const populatedPost = await Post.findById(post._id)
+    .populate("user", "name username profile_picture")
+    .lean();
+
   return res
     .status(200)
-    .json(new ApiResponse(200, post, "Post created successfully"));
+    .json(new ApiResponse(200, populatedPost, "Post created successfully"));
 });
 
 const editCaption = asyncHandler(async (req, res) => {
