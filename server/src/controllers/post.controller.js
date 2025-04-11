@@ -72,7 +72,8 @@ const editCaption = asyncHandler(async (req, res) => {
     throw new ApiError(403, "You can edit only your posts");
   }
 
-  const updatedPost = await Post.findByIdAndUpdate(
+  //update the post
+  await Post.findByIdAndUpdate(
     postId,
     {
       $set: {
@@ -81,6 +82,15 @@ const editCaption = asyncHandler(async (req, res) => {
     },
     { new: true }
   );
+
+  // populate with user details
+  const updatedPost = await Post.findById(postId)
+    .populate("user", "name username profile_picture")
+    .lean();
+
+    if (!updatedPost) {
+      throw new ApiError(404, "Updated post not found");
+    }
 
   return res
     .status(200)
