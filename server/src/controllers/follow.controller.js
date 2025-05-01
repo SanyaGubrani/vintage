@@ -28,50 +28,75 @@ const followUser = asyncHandler(async (req, res) => {
   }
 
   // follow / unfollow toggle
-  const alreadyFollowed = await Follow.findOneAndDelete({
+  const alreadyFollowed = await Follow.findOne({
     follower: followerUserId,
     following: followingUserId,
   });
 
-  let action = "unfollowed";
-  let followData = null;
-
-  // follow action
-  if (!alreadyFollowed) {
-    const newFollow = await Follow.create({
-      follower: followerUserId,
-      following: followingUserId,
-    });
-
-    // get follower and following user details
-    followData = await Follow.findById(newFollow._id)
-      .populate("follower", "username profile_picture")
-      .populate("following", "username profile_picture");
-
-    action = "followed";
-
-    // get update followers/following count
-    const [followersCount, followingCount] = await Promise.all([
-      Follow.countDocuments({ following: followingUserId }), // num of users following this user
-      Follow.countDocuments({ follower: followerUserId }), // num of users this user follows
+  if (alreadyFollowed) {
+    // Handle unfollow case
+    await Follow.findByIdAndDelete(alreadyFollowed._id);
+    
+    // Get updated counts AFTER the delete operation
+    const [targetUserFollowersCount, currentUserFollowingCount] = await Promise.all([
+      Follow.countDocuments({ following: followingUserId }), // Target user's followers count
+      Follow.countDocuments({ follower: followerUserId }),   // Current user's following count
     ]);
 
     return res.status(200).json(
       new ApiResponse(
         200,
         {
-          isFollowing: action === "followed",
-          followData,
+          isFollowing: false,
+          currentUser: {
+            _id: followerUserId,
+            followingCount: currentUserFollowingCount,
+          },
           targetUser: {
             _id: followingUserId,
-            followersCount,
-            followingCount,
+            followersCount: targetUserFollowersCount,
           },
         },
-        `User ${action} successfully`
+        "User unfollowed successfully"
       )
     );
   }
+
+  // Handle follow case
+  const newFollow = await Follow.create({
+    follower: followerUserId,
+    following: followingUserId,
+  });
+
+  // get follower and following user details
+  const followData = await Follow.findById(newFollow._id)
+    .populate("follower", "username profile_picture")
+    .populate("following", "username profile_picture");
+  
+  // Get updated counts AFTER the create operation
+  const [targetUserFollowersCount, currentUserFollowingCount] = await Promise.all([
+    Follow.countDocuments({ following: followingUserId }), // Target user's followers count
+    Follow.countDocuments({ follower: followerUserId }),   // Current user's following count
+  ]);
+
+  return res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        isFollowing: true,
+        followData,
+        currentUser: {
+          _id: followerUserId,
+          followingCount: currentUserFollowingCount,
+        },
+        targetUser: {
+          _id: followingUserId,
+          followersCount: targetUserFollowersCount,
+        },
+      },
+      "User followed successfully"
+    )
+  );
 });
 
 const getFollowers = asyncHandler(async (req, res) => {
