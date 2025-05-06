@@ -147,9 +147,39 @@ const updateCoverImage = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, user, "Cover image uploader successfully"));
 });
 
+const getOtherUserProfile = asyncHandler(async (req, res) => {
+  const { userId } = req.params;
+
+  if (!userId) {
+    throw new ApiError(400, "User ID is required");
+  }
+
+  const user = await User.findById(userId).select("-password -refreshToken -email");
+
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+
+  const userProfile = {
+    _id: user._id,
+    username: user.username,
+    name: user.name,
+    profile_picture: user.profile_picture,
+    cover_image: user.cover_image,
+    bio: user.bio,
+    createdAt: user.createdAt,
+    updatedAt: user.updatedAt
+  };
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, userProfile, "User profile fetched successfully"));
+});
+
 export {
   getUserProfile,
   updateUserProfile,
   updateProfilePicture,
   updateCoverImage,
+  getOtherUserProfile
 };
