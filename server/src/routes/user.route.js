@@ -4,6 +4,7 @@ import {
   updateCoverImage,
   updateProfilePicture,
   updateUserProfile,
+  getOtherUserProfile
 } from "../controllers/user.controller.js";
 import { isAuthenticated } from "../middlewares/auth.middleware.js";
 import { upload } from "../middlewares/multer.middleware.js";
@@ -21,6 +22,7 @@ router
     upload.single("profile_picture"),
     updateProfilePicture
   )
-  .post("/coverImage", upload.single("cover_image"), updateCoverImage);
+  .post("/coverImage", upload.single("cover_image"), updateCoverImage)
+  .get("/:userId", getOtherUserProfile)
 
 export default router;
