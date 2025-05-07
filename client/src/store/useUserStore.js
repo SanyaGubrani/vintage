@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
-import { usePostStore } from "./usePostStore";
 
 export const useUserStore = create((set) => ({
   fetchingUserData: true,
@@ -48,12 +47,6 @@ export const useUserStore = create((set) => ({
       toast.success("Profile Picture updated successfully");
       console.log("profile picture: ", res.data);
 
-      // Update the user data in all posts
-      const updateUserDataInPosts =
-        usePostStore.getState().updateUserDataInPosts;
-      if (updateUserDataInPosts) {
-        updateUserDataInPosts(userData);
-      }
     } catch (error) {
       toast.error("Error while uploading profile picture");
       console.log("Error while uploading profile picture: ", error);

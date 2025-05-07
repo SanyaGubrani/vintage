@@ -116,7 +116,7 @@
     width: 100%;
     &::after {
       content: "";
-      position: fixed; 
+      position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 1;
@@ -128,7 +128,7 @@
 
   body::before {
     content: "";
-    position: fixed; 
+    position: fixed;
     inset: 0;
     background-image: url("/images/grain3.jpg");
     background-size: cover;
@@ -138,9 +138,9 @@
     z-index: 0;
     pointer-events: none;
     mix-blend-mode: multiply;
-    will-change: transform; 
-    backface-visibility: hidden; 
-    transform: translateZ(0); 
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
   }
 }
 

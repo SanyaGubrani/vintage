@@ -88,9 +88,9 @@ const editCaption = asyncHandler(async (req, res) => {
     .populate("user", "name username profile_picture")
     .lean();
 
-    if (!updatedPost) {
-      throw new ApiError(404, "Updated post not found");
-    }
+  if (!updatedPost) {
+    throw new ApiError(404, "Updated post not found");
+  }
 
   return res
     .status(200)
@@ -140,7 +140,8 @@ const getAllPosts = asyncHandler(async (req, res) => {
   const posts = await Post.find(query)
     .sort({ createdAt: -1 })
     .limit(queryLimit + 1)
-    .populate("user", "name username profile_picture");
+    .populate("user", "name username profile_picture")
+    .lean();
 
   // Check if there are more posts
   const hasNextPage = posts.length > queryLimit;
