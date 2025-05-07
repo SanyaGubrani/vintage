@@ -29,6 +29,14 @@ const ProfileCard = () => {
     );
   }
 
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
     <div
       className=" bg-muted mx-auto py-3 border-3 border-primary-foreground/50 rounded-lg shadow-vintage"
@@ -44,12 +52,13 @@ const ProfileCard = () => {
               className="w-full h-full object-cover"
             />
           ) : (
-            <div className="w-full h-full bg-muted flex items-center justify-center text-primary font-newspaper">
+            <div className="w-full h-full text-2xl bg-muted flex items-center justify-center text-primary font-newspaper">
               {user.username?.charAt(0).toUpperCase() || "Vintage"}
             </div>
           )}
         </div>
       </div>
+
       {/* name */}
       <h3 className="text-center text-base lg:text-lg font-typewriter-bold">
         {user.name || "What's your name?"}
@@ -66,8 +75,9 @@ const ProfileCard = () => {
       </div>
       {/* edit profile */}
       <div className="mt-3 flex justify-center px-4">
-        <Link className="button-vintage text-center !w-full !py-1 lg:!py-1.5 !px-2 !text-xs"
-        to="/profile"
+        <Link
+          className="button-vintage text-center !w-full !py-1 lg:!py-1.5 !px-2 !text-xs"
+          to="/profile"
         >
           Profile
         </Link>
@@ -75,7 +85,7 @@ const ProfileCard = () => {
       {/* Logout User */}
       <div className="mt-3 flex px-4">
         <button
-          onClick={logoutUser}
+          onClick={handleLogout}
           className="button-vintage w-full !bg-[#403c28]/75 !border-[#4f463b] !py-1 lg:!py-1.5 !px-2 !text-xs font-typewriter-bold"
         >
           Logout
