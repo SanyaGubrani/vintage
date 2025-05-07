@@ -1,15 +1,20 @@
 import React, { useEffect } from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom"; // Add useLocation here
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Auth from "@/pages/Auth";
 import { useAuthStore } from "@/store/useAuthStore";
 import { Loader } from "lucide-react";
 import Home from "@/pages/Home";
 import { Toaster } from "react-hot-toast";
 import Footer from "./components/Footer";
+import ProfilePage from "./pages/ProfilePage";
+import UserProfilePage from "./pages/UserProfilePage";
+import Bookmarks from "./pages/Bookmarks";
+import useScrollToTop from "./hooks/useScrollToTop";
 
 const App = () => {
   const location = useLocation();
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
+  useScrollToTop();
 
   useEffect(() => {
     console.log("App mounted, checking authentication...");
@@ -44,8 +49,11 @@ const App = () => {
           />
           <Route
             path="/auth"
-            element={!authUser ? <Auth /> : <Navigate to="/"  />}
+            element={!authUser ? <Auth /> : <Navigate to="/" />}
           />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/user/:userId" element={<UserProfilePage />} />
+          <Route path="/bookmarks" element={<Bookmarks />} />
         </Routes>
 
         <Toaster
