@@ -23,7 +23,7 @@ const followUser = asyncHandler(async (req, res) => {
   }
 
   // no self-follow
-  if (followerUserId.toString() === followingUserId) {
+  if (followerUserId.toString() === followingUserId.toString()) {
     throw new ApiError(400, "You cannot follow yourself");
   }
 
@@ -36,12 +36,13 @@ const followUser = asyncHandler(async (req, res) => {
   if (alreadyFollowed) {
     // Handle unfollow case
     await Follow.findByIdAndDelete(alreadyFollowed._id);
-    
+
     // Get updated counts AFTER the delete operation
-    const [targetUserFollowersCount, currentUserFollowingCount] = await Promise.all([
-      Follow.countDocuments({ following: followingUserId }), // Target user's followers count
-      Follow.countDocuments({ follower: followerUserId }),   // Current user's following count
-    ]);
+    const [targetUserFollowersCount, currentUserFollowingCount] =
+      await Promise.all([
+        Follow.countDocuments({ following: followingUserId }), // Target user's followers count
+        Follow.countDocuments({ follower: followerUserId }), // Current user's following count
+      ]);
 
     return res.status(200).json(
       new ApiResponse(
@@ -72,12 +73,13 @@ const followUser = asyncHandler(async (req, res) => {
   const followData = await Follow.findById(newFollow._id)
     .populate("follower", "username profile_picture")
     .populate("following", "username profile_picture");
-  
+
   // Get updated counts AFTER the create operation
-  const [targetUserFollowersCount, currentUserFollowingCount] = await Promise.all([
-    Follow.countDocuments({ following: followingUserId }), // Target user's followers count
-    Follow.countDocuments({ follower: followerUserId }),   // Current user's following count
-  ]);
+  const [targetUserFollowersCount, currentUserFollowingCount] =
+    await Promise.all([
+      Follow.countDocuments({ following: followingUserId }), // Target user's followers count
+      Follow.countDocuments({ follower: followerUserId }), // Current user's following count
+    ]);
 
   return res.status(200).json(
     new ApiResponse(
@@ -164,4 +166,28 @@ const getFollowing = asyncHandler(async (req, res) => {
   );
 });
 
-export { followUser, getFollowers, getFollowing };
+const checkFollowStatus = asyncHandler(async (req, res) => {
+  const { userId } = req.params;
+  const currentUserId = req.user._id;
+
+  if (!userId) {
+    throw new ApiError(400, "User ID is required");
+  }
+
+  const isFollowing = await Follow.exists({
+    follower: currentUserId,
+    following: userId,
+  });
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        { isFollowing: !!isFollowing },
+        "Follow status retrieved"
+      )
+    );
+});
+
+export { followUser, getFollowers, getFollowing, checkFollowStatus };
