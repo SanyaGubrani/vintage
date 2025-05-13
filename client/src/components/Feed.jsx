@@ -2,9 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { usePostStore } from "../store/usePostStore";
 import PostCard from "./PostCard";
 import { Loader2 } from "lucide-react";
+import { useLikeStore } from "../store/useLikeStore";
 
 const Feed = () => {
   const { allPosts, getAllPosts } = usePostStore();
+  const { setLikesFromPosts } = useLikeStore();
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [cursor, setCursor] = useState(null);
@@ -12,13 +14,14 @@ const Feed = () => {
 
   const loadPosts = async () => {
     if (loadingRef.current || !hasMore) return;
-    
+
     try {
       loadingRef.current = true;
       setLoading(true);
-      
+
       const result = await getAllPosts(cursor);
-      
+      setLikesFromPosts(allPosts);
+
       setHasMore(result.hasMore);
       setCursor(result.nextCursor);
     } catch (error) {
@@ -45,7 +48,7 @@ const Feed = () => {
       { threshold: 0.5 }
     );
 
-    const target = document.getElementById('scroll-trigger');
+    const target = document.getElementById("scroll-trigger");
     if (target) observer.observe(target);
 
     return () => {
@@ -66,10 +69,10 @@ const Feed = () => {
         {allPosts.map((post) => (
           <PostCard key={post._id} post={post} />
         ))}
-        
+
         {/* Scroll trigger element */}
-        <div 
-          id="scroll-trigger" 
+        <div
+          id="scroll-trigger"
           className="h-10 flex items-center justify-center"
         >
           {loading && <Loader2 className="animate-spin size-10" />}
@@ -77,7 +80,7 @@ const Feed = () => {
 
         {!hasMore && allPosts.length > 0 && (
           <div className="bg-accent/10 p-6 text-center italic text-muted-foreground">
-            You've reached the end of Feed 
+            You've reached the end of Feed
           </div>
         )}
       </div>
