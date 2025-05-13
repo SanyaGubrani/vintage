@@ -1,11 +1,11 @@
+import { Post } from "../models/post.model.js";
+import { User } from "../models/user.model.js";
 import { Like } from "../models/like.model.js";
 import ApiError from "../utils/ApiError.js";
-import asyncHandler from "../utils/asyncHandler.js";
 import ApiResponse from "../utils/ApiResponse.js";
-import { Post } from "../models/post.model.js";
-import { Comment } from "../models/comment.model.js";
+import asyncHandler from "../utils/asyncHandler.js";
 
-const likePost = asyncHandler(async (req, res) => {
+const toggleLike = asyncHandler(async (req, res) => {
   if (!req.user) {
     throw new ApiError(401, "User not authenticated");
   }
@@ -13,114 +13,52 @@ const likePost = asyncHandler(async (req, res) => {
   const { postId } = req.params;
   const userId = req.user?._id;
 
-  if (!postId) throw new ApiError(404, "Post ID is required");
+  if (!postId) {
+    throw new ApiError(400, "Post ID is required");
+  }
 
-  // check if post exists
-  const post = await Post.exists({ _id: postId });
-
+  // Check if post exists
+  const post = await Post.findById(postId);
   if (!post) {
     throw new ApiError(404, "Post not found");
   }
 
-  // unlike action
-  const existingLike = await Like.findOneAndDelete({
-    post: postId,
-    user: userId,
-    comment: { $exists: false },
-  });
+  //check if the like already exists
+  const existingLike = await Like.findOne({ user: userId, post: postId });
 
-  let action = "unliked";
+  let isLiked = false;
 
-  // like action
-  if (!existingLike) {
-    await Like.create({ post: postId, user: userId });
-    action = "liked";
+  if (existingLike) {
+    // unlike
+    await existingLike.deleteOne();
+    await Post.findByIdAndUpdate(postId, { $inc: { likeCount: -1 } });
+
+    isLiked = false;
+  } else {
+    // like
+    await Like.create({ user: userId, post: postId });
+    await Post.findByIdAndUpdate(postId, { $inc: { likeCount: 1 } });
+    isLiked = true;
   }
 
-  // likes count and users who liked
-  const [likesCount, likedBy] = await Promise.all([
-    // count likes
-    Like.countDocuments({
-      post: postId,
-      comment: { $exists: false },
-    }),
+  const likes = await Like.find({ post: postId })
+    .populate("user", "username profile_picture")
+    .lean();
 
-    // get user who liked the post (limit 10)
-    Like.find({ post: postId })
-      .sort({ createdAt: -1 })
-      .limit(10)
-      .select("user")
-      .populate("user", "username profile_picture"),
-  ]);
-
-  // check if curretn user liked the post
-  const isLiked = action === "liked";
+  const updatedPost = await Post.findById(postId).lean();
 
   return res.status(200).json(
     new ApiResponse(
       200,
       {
-        post: postId,
-        likesCount,
         isLiked,
-        likedBy: likedBy.map((like) => like.user),
-        action,
+        likeCount: updatedPost.likeCount,
+        postId,
+        likedUsers: likes.map((like) => like.user),
       },
-      `Post ${action} successfully`
+      `Post ${isLiked ? "Liked" : "Unliked"} successfully`
     )
   );
 });
 
-const likeComment = asyncHandler(async (req, res) => {
-  if (!req.user) {
-    throw new ApiError(401, "User not authenticated");
-  }
-
-  const { commentId } = req.params;
-  const userId = req.user._id;
-
-  if (!commentId) {
-    throw new ApiError(400, "Comment ID is required");
-  }
-
-  const commentExists = await Comment.exists({ _id: commentId });
-  if (!commentExists) {
-    throw new ApiError(404, "Comment not found");
-  }
-
-  const existingLike = await Like.findOneAndDelete({
-    comment: commentId,
-    user: userId,
-    post: { $exists: false },
-  });
-
-  let action = "unliked";
-
-  if (!existingLike) {
-    await Like.create({
-      comment: commentId,
-      user: userId,
-    });
-    action = "liked";
-  }
-
-  const likesCount = await Like.countDocuments({
-    comment: commentId,
-    post: { $exists: false },
-  });
-
-  return res.status(200).json(
-    new ApiResponse(
-      200,
-      {
-        comment: commentId,
-        likesCount,
-        isLiked: action === "liked",
-        action,
-      },
-      `Comment ${action} successfully`
-    )
-  );
-});
-
-export { likePost, likeComment };
+export { toggleLike };
