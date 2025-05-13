@@ -4,6 +4,22 @@ import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { User } from "../models/user.model.js";
+import { Like } from "../models/like.model.js";
+
+const withLikedByCurrentUser = async (posts, userId) => {
+  const postIds = posts.map((post) => post._id);
+
+  const likes = await Like.find({ user: userId, post: { $in: postIds } })
+    .select("post")
+    .lean();
+
+  const likedPostIds = new Set(likes.map((like) => like.post.toString()));
+
+  return posts.map((post) => ({
+    ...post,
+    isLiked: likedPostIds.has(post._id.toString()),
+  }));
+};
 
 const createPost = asyncHandler(async (req, res) => {
   if (!req.user) {
@@ -152,11 +168,13 @@ const getAllPosts = asyncHandler(async (req, res) => {
 
   const nextCursor = hasNextPage ? posts[posts.length - 1]._id : null;
 
+  const postsWithLikes = await withLikedByCurrentUser(posts, req.user?._id);
+
   return res.status(200).json(
     new ApiResponse(
       200,
       {
-        posts,
+        posts: postsWithLikes,
         pagination: {
           nextCursor,
           hasNextPage,
@@ -191,7 +209,8 @@ const getUserPosts = asyncHandler(async (req, res) => {
   const posts = await Post.find(query)
     .sort({ createdAt: -1 })
     .limit(queryLimit + 1)
-    .populate("user", "username name profile_picture");
+    .populate("user", "username name profile_picture")
+    .lean();
 
   const hasNextPage = posts.length > queryLimit;
 
@@ -201,11 +220,13 @@ const getUserPosts = asyncHandler(async (req, res) => {
 
   const nextCursor = hasNextPage ? posts[posts.length - 1]._id : null;
 
+  const postsWithLikes = await withLikedByCurrentUser(posts, req.user?._id);
+
   return res.status(200).json(
     new ApiResponse(
       200,
       {
-        posts,
+        posts: postsWithLikes,
         pagination: {
           nextCursor,
           hasNextPage,
@@ -235,7 +256,8 @@ const getMyPosts = asyncHandler(async (req, res) => {
   const posts = await Post.find(query)
     .sort({ createdAt: -1 })
     .limit(queryLimit + 1)
-    .populate("user", "username name profile_picture");
+    .populate("user", "username name profile_picture")
+    .lean();
 
   const hasNextPage = posts.length > queryLimit;
 
@@ -246,11 +268,13 @@ const getMyPosts = asyncHandler(async (req, res) => {
   const nextCursor =
     hasNextPage && posts.length > 0 ? posts[posts.length - 1]._id : null;
 
+  const postsWithLikes = await withLikedByCurrentUser(posts, req.user?._id);
+
   return res.status(200).json(
     new ApiResponse(
       200,
       {
-        posts,
+        posts: postsWithLikes,
         pagination: {
           nextCursor,
           hasNextPage,

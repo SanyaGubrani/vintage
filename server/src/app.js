@@ -18,6 +18,7 @@ import savePostRouter from "./routes/savePost.route.js";
 import followRouter from "./routes/follow.route.js";
 import messageRouter from "./routes/message.route.js";
 import { app, server } from "./utils/soket.js";
+import likePostRouter from "./routes/like.route.js";
 
 // Configurations
 // const app = express();
@@ -60,5 +61,6 @@ app.use("/api/v1/comment", commentRouter);
 app.use("/api/v1/save", savePostRouter);
 app.use("/api/v1/follow", followRouter);
 app.use("/api/v1/message", messageRouter);
+app.use("/api/v1/like", likePostRouter);
 
 export { app };
