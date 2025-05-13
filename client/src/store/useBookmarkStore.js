@@ -13,9 +13,9 @@ export const useBookmarkStore = create((set) => ({
       const validPosts = res.data.data.savedPosts.filter(
         (savedPost) => savedPost.post !== null
       );
-      set({ 
+      set({
         savedPosts: validPosts,
-        fetchingBookmarkPosts: false 
+        fetchingBookmarkPosts: false,
       });
     } catch (error) {
       console.error("Error fetching saved posts:", error);
@@ -27,11 +27,10 @@ export const useBookmarkStore = create((set) => ({
     try {
       const res = await axiosInstance.post(`/save/${postId}`);
       const { saved, savedPost } = res.data.data;
-      
       set((state) => ({
-        savedPosts: saved 
+        savedPosts: saved
           ? [savedPost, ...state.savedPosts]
-          : state.savedPosts.filter(sp => sp.post?._id !== postId)
+          : state.savedPosts.filter((sp) => sp.post?._id !== postId),
       }));
 
       toast.success(saved ? "Post saved" : "Post unsaved");

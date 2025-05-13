@@ -14,12 +14,12 @@ import useScrollToTop from "./hooks/useScrollToTop";
 const App = () => {
   const location = useLocation();
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
+
   useScrollToTop();
 
   useEffect(() => {
-    console.log("App mounted, checking authentication...");
     checkAuth();
-
+  
     const fromGoogle =
       location.search.includes("fromGoogle") ||
       document.referrer.includes("accounts.google.com");
@@ -29,7 +29,6 @@ const App = () => {
       checkAuth();
     }
   }, [checkAuth, location]);
-  console.log("Auth state:", { authUser, isCheckingAuth });
 
   if (isCheckingAuth && !authUser)
     return (

@@ -15,6 +15,7 @@ const Bookmarks = () => {
         await getSavedPosts();
       }
     };
+    
 
     fetchPosts();
 
