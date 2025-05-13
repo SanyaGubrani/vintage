@@ -9,12 +9,13 @@ import {
   X,
   Loader2,
   Check,
-  BookmarkCheck
+  BookmarkCheck,
 } from "lucide-react";
 import { useUserStore } from "../store/useUserStore";
 import { usePostStore } from "../store/usePostStore";
 import { useNavigate } from "react-router-dom";
 import { useBookmarkStore } from "../store/useBookmarkStore";
+import { useLikeStore } from "../store/useLikeStore";
 
 const PostCard = ({ post }) => {
   const { user, getUserProfile } = useUserStore();
@@ -27,29 +28,27 @@ const PostCard = ({ post }) => {
   const [newCaption, setNewCaption] = useState(post.caption);
   const editFormRef = useRef(null);
   const navigate = useNavigate();
+  const { likes, toggleLike, isProcessingLike } = useLikeStore();
+
+  const likeData = likes[post._id] || {
+    isLiked: post.isLiked || false,
+    likeCount: post.likeCount || 0,
+  };
 
   useEffect(() => {
-    if (savedPosts?.some((savedPost) => savedPost.post?._id === post._id)) {
-      setIsSaved(true);
-    }
-  }, [savedPosts, post._id]);
+    const isPostSaved = savedPosts?.some(
+      (savedPost) => savedPost.post?._id === post._id
+    );
+    setIsSaved(isPostSaved);
+  }, [post._id, savedPosts]);
 
-  // Handle save/unsave toggle
   const handleSaveToggle = async () => {
     try {
-      const result = await addToSavedPosts(post._id);
-      if (result?.success) {
-        setIsSaved(!isSaved);
-        
-        // If we're in the Bookmarks page and unsaving, trigger a refresh
-        if (!result.saved && window.location.pathname === '/bookmarks') {
-          getSavedPosts();
-        }
-      }
+      await addToSavedPosts(post._id);
     } catch (error) {
       console.error("Error toggling save status:", error);
     }
-  }
+  };
 
   const handleUserProfileClick = () => {
     if (!post.user?._id) return;
@@ -268,19 +267,35 @@ const PostCard = ({ post }) => {
 
       <div className="flex items-center justify-between p-3">
         <div className="flex items-center gap-4">
-          <button className="flex items-center gap-1 p-1 bg-muted-foreground/15 rounded justify-center hover:bg-muted-foreground/35 hover:text-black/85 cursor-pointer transition-colors">
-            <Heart size={18} />
-            <span className="text-xs font-medium font-typewriter-bold">
-              {post.likes || 100}
+          <button
+            className="flex items-center gap-1 p-1 bg-muted-foreground/15 rounded justify-center hover:bg-muted-foreground/35 hover:text-black/85 cursor-pointer transition-colors"
+            onClick={() => toggleLike(post._id)}
+            disabled={isProcessingLike}
+          >
+            <Heart
+              size={21}
+              className={`${
+                likeData.isLiked
+                  ? "fill-primary/90 text-accent-foreground/85"
+                  : "fill-none"
+              }
+              `}
+            />
+            <span
+              className={`text-sm font-medium translate-y-[1.5px] text-center font-typewriter-bold transition-all duration-100
+            `}
+            >
+              {likeData.likeCount}
             </span>
           </button>
           <button className="flex items-center gap-1 p-1 bg-muted-foreground/15 rounded justify-center hover:bg-muted-foreground/35 hover:text-black/85 cursor-pointer transition-colors">
-            <MessageSquare size={18} />
-            <span className="text-xs font-medium font-typewriter-bold">
+            <MessageSquare size={21} />
+            <span className="text-sm font-medium font-typewriter-bold">
               {post.comments || 15}
             </span>
           </button>
         </div>
+        
         {/* Bookmark button */}
         <button
           className={`cursor-pointer p-1.5 rounded-full transition-all ${
