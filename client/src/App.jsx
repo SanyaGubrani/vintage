@@ -10,6 +10,7 @@ import ProfilePage from "./pages/ProfilePage";
 import UserProfilePage from "./pages/UserProfilePage";
 import Bookmarks from "./pages/Bookmarks";
 import useScrollToTop from "./hooks/useScrollToTop";
+import CommentsPage from "./pages/Comments";
 
 const App = () => {
   const location = useLocation();
@@ -19,7 +20,7 @@ const App = () => {
 
   useEffect(() => {
     checkAuth();
-  
+
     const fromGoogle =
       location.search.includes("fromGoogle") ||
       document.referrer.includes("accounts.google.com");
@@ -53,6 +54,7 @@ const App = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/user/:userId" element={<UserProfilePage />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
+          <Route path="/comments/:postId" element={<CommentsPage />} />
         </Routes>
 
         <Toaster
