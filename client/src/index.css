@@ -246,6 +246,15 @@
     0 0 0 2px rgba(147, 109, 88, 0.2);
 }
 
+.EmojiPickerReact {
+  --epr-bg-color: #f8ebd6 !important;
+  --epr-category-label-bg-color: none !important;
+  --epr-hover-bg-color: #e0cdb2 !important;
+  --epr-text-color: #46251ae5 !important;
+  border: 3px solid #723d2c82 !important;
+}
+
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
