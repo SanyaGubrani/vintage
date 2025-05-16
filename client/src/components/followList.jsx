@@ -1,6 +1,8 @@
 import React from "react";
 import { X } from "lucide-react";
 import FollowButton from "./FollowButton";
+import { useNavigate } from "react-router-dom";
+import { useUserStore } from "../store/useUserStore";
 
 const FollowListOverlay = ({
   isOpen,
@@ -10,8 +12,20 @@ const FollowListOverlay = ({
   isLoading,
   currentUserId,
 }) => {
-    
   if (!isOpen) return null;
+
+  const { user } = useUserStore();
+  const navigate = useNavigate();
+
+  const handleUserProfileClick = (userId) => {
+    if (!userId) return;
+    onClose();
+    if (userId === user?.id) {
+      navigate("/profile");
+    } else {
+      navigate(`/user/${userId}`);
+    }
+  };
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
@@ -36,19 +50,23 @@ const FollowListOverlay = ({
           ) : users?.length > 0 ? (
             <div className="p-2">
               {users.map((userData) => {
-                   const user = title === "Followers" 
-                   ? userData.follower 
-                   : userData.following;
+                const user =
+                  title === "Followers"
+                    ? userData.follower
+                    : userData.following;
                 if (!user) return null;
 
                 return (
                   <div
                     key={user._id}
-                    className="flex items-center justify-between p-2 hover:bg-accent/10 rounded-lg"
+                    className="flex items-center justify-between p-2 hover:bg-accent/10 rounded-lg transition"
                   >
                     <div className="flex items-center gap-3">
                       {/* Profile Picture */}
-                      <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary">
+                      <div
+                        className="w-10 h-10 cursor-pointer rounded-full overflow-hidden border-2 border-primary hover:border-4"
+                        onClick={() => handleUserProfileClick(user._id)}
+                      >
                         {user.profile_picture ? (
                           <img
                             src={user.profile_picture}
@@ -64,7 +82,10 @@ const FollowListOverlay = ({
 
                       {/* User Info */}
                       <div>
-                        <p className="font-typewriter font-bold text-sm">
+                        <p
+                          className="font-typewriter font-bold text-sm cursor-pointer hover:text-primary"
+                          onClick={() => handleUserProfileClick(user._id)}
+                        >
                           {user.name || user.username}
                         </p>
                         <p className="text-xs text-muted-foreground">
