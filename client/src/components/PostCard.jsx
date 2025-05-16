@@ -16,6 +16,7 @@ import { usePostStore } from "../store/usePostStore";
 import { useNavigate } from "react-router-dom";
 import { useBookmarkStore } from "../store/useBookmarkStore";
 import { useLikeStore } from "../store/useLikeStore";
+import { useCommentStore } from "../store/useCommentStore";
 
 const PostCard = ({ post }) => {
   const { user, getUserProfile } = useUserStore();
@@ -29,10 +30,17 @@ const PostCard = ({ post }) => {
   const editFormRef = useRef(null);
   const navigate = useNavigate();
   const { likes, toggleLike, isProcessingLike } = useLikeStore();
+  const commentCount = useCommentStore((state) =>
+    state.getCommentCount(post._id)
+  );
 
   const likeData = likes[post._id] || {
     isLiked: post.isLiked || false,
     likeCount: post.likeCount || 0,
+  };
+
+  const handleCommentClick = () => {
+    navigate(`/comments/${post._id}`);
   };
 
   useEffect(() => {
@@ -288,14 +296,17 @@ const PostCard = ({ post }) => {
               {likeData.likeCount}
             </span>
           </button>
-          <button className="flex items-center gap-1 p-1 bg-muted-foreground/15 rounded justify-center hover:bg-muted-foreground/35 hover:text-black/85 cursor-pointer transition-colors">
+          <button
+            className="flex items-center gap-1 p-1 bg-muted-foreground/15 rounded justify-center hover:bg-muted-foreground/35 hover:text-black/85 cursor-pointer transition-colors"
+            onClick={handleCommentClick}
+          >
             <MessageSquare size={21} />
             <span className="text-sm font-medium font-typewriter-bold">
-              {post.comments || 15}
+              {commentCount || 0}
             </span>
           </button>
         </div>
-        
+
         {/* Bookmark button */}
         <button
           className={`cursor-pointer p-1.5 rounded-full transition-all ${
