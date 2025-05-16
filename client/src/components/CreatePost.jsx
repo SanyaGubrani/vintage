@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Camera, X, Paperclip, Image, Send, Loader2 } from "lucide-react";
+import { Camera, X, Smile, Send, Loader2 } from "lucide-react";
+import EmojiPicker from "emoji-picker-react";
 import { useUserStore } from "../store/useUserStore";
 import { usePostStore } from "../store/usePostStore";
 import { useForm } from "react-hook-form";
+import { BsEmojiSmile } from "react-icons/bs";
 
 const CreatePost = () => {
   const { user, getUserProfile } = useUserStore();
@@ -69,33 +71,59 @@ const CreatePost = () => {
     }
   };
 
-  return (
-    <div className="bg-accent/10 rounded-lg border-4 border-secondary-foreground/20 shadow-vintage p-4 my-6">
-      <h2 className="font-newspaper text-center text-lg mb-4 text-primary/80 tracking-wide">
-        Create New Memory
-      </h2>
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const emojiPickerRef = useRef(null);
 
+  // Add emoji to caption
+  const onEmojiClick = (emojiObject) => {
+    const { setValue, getValues } = createPostForm;
+    const currentCaption = getValues("caption") || "";
+    setValue("caption", currentCaption + emojiObject.emoji);
+  };
+
+  // Close emoji picker when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        emojiPickerRef.current &&
+        !emojiPickerRef.current.contains(event.target)
+      ) {
+        setShowEmojiPicker(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div className="max-w-lg bg-accent/10 rounded-lg border-4 border-secondary-foreground/20 shadow-vintage p-4 my-6">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex items-start gap-3 mb-4">
-          {/* User Avatar */}
-          <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/70 shrink-0 mt-1">
-            {user.profile_picture ? (
-              <img
-                src={user?.profile_picture || "/images/default-avatar.png"}
-                alt={user?.name || "User"}
-                className="w-full h-full object-cover filter"
-              />
-            ) : (
-              <div className="w-full h-full bg-accent/20 drop-shadow-xl flex items-center justify-center text-primary font-newspaper">
-                {user.username?.charAt(0).toUpperCase() || "Vintage"}
-              </div>
-            )}
+        <div className="flex flex-col w-full items-center justify-center gap-3 mb-4">
+          <div className="flex items-center w-full justify-start mb-2 gap-2">
+            {/* User Avatar */}
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/70 shrink-0 mt-1">
+              {user.profile_picture ? (
+                <img
+                  src={user?.profile_picture || "/images/default-avatar.png"}
+                  alt={user?.name || "User"}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-accent/20 drop-shadow-xl flex items-center justify-center text-primary font-newspaper">
+                  {user.username?.charAt(0).toUpperCase() || "Vintage"}
+                </div>
+              )}
+            </div>
+            <h2 className="font-newspaper text-center text-lg text-primary/80 tracking-wide">
+              Create a memory
+            </h2>
           </div>
 
           {/* Caption Input */}
-          <div className="flex-1">
+          <div className="flex-1 w-full px-1">
             <textarea
-              className="w-full min-h-[130px] resize-none p-3 rounded-md border-2 border-primary/40 bg-muted/20 placeholder:text-muted-foreground/70 font-typewriter text-sm focus:outline-none focus:border-primary/80 transition-colors"
+              className="w-full min-h-[110px] resize-none p-3 rounded-xl bg-muted/55 placeholder:text-muted-foreground/70 font-typewriter text-base focus:outline-none focus:border-primary/80 transition-colors"
               placeholder="Share a memory..."
               {...register("caption")}
             ></textarea>
@@ -126,20 +154,51 @@ const CreatePost = () => {
 
         {/* Action Buttons */}
         <div className="flex items-center justify-between mt-2 border-t-2 border-primary/20 pt-3">
-          <div className="flex items-center gap-2">
-            {/* Add Image Button */}
-            <label className="flex items-center gap-1.5 py-1.5 px-2.5 font-medium bg-muted/30 rounded-md border border-primary/40 hover:bg-muted-foreground/20 transition-colors cursor-pointer text-sm font-typewriter">
-              <Camera size={20} className="text-primary" />
-              {/* <span>Add Film</span> */}
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-                accept="image/*"
-                className="hidden"
-                name="media"
-              />
-            </label>
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              {/* Add Image Button */}
+              <label className="flex items-center gap-1.5 py-1.5 px-2.5 font-medium bg-muted/30 rounded-md border border-primary/40 hover:bg-muted-foreground/20 transition-colors cursor-pointer text-sm font-typewriter">
+                <Camera size={23} className="text-primary" />
+                {/* <span>Add Film</span> */}
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  accept="image/*"
+                  className="hidden"
+                  name="media"
+                />
+              </label>
+            </div>
+
+            {/* Emoji Picker Button */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                className="flex items-center gap-1.5 py-1.5 px-2.5 font-medium bg-muted/30 rounded-md border border-primary/40 hover:bg-muted-foreground/20 transition-colors cursor-pointer text-sm font-typewriter"
+              >
+                <BsEmojiSmile size={22} className="text-primary" />
+              </button>
+
+              {/* Emoji Picker Popup */}
+              {showEmojiPicker && (
+                <div
+                  ref={emojiPickerRef}
+                  className="absolute top-10 left-0 z-50"
+                >
+                  <EmojiPicker
+                    onEmojiClick={onEmojiClick}
+                    theme="light"
+                    emojiStyle="apple"
+                    skinTonesDisabled
+                    searchDisabled
+                    width={400}
+                    height={400}
+                  />
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Submit Button */}
