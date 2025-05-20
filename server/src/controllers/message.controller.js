@@ -61,7 +61,8 @@ const sendMessages = asyncHandler(async (req, res) => {
   }
 
   // user can send both text & media as a message
-  const { message, media } = req.body;
+  const { message } = req.body;
+  const media = req.file?.path;
 
   let mediaUrl;
   if (media) {
@@ -81,7 +82,7 @@ const sendMessages = asyncHandler(async (req, res) => {
   if (receiverSocketId) {
     io.to(receiverSocketId).emit("newMessage", newMessage);
   }
-  
+
   res
     .status(200)
     .json(new ApiResponse(200, newMessage, "Message sent successfully"));
