@@ -45,7 +45,7 @@ const CommentBox = ({ postId }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex shadow-sm shadow-primary/40 items-center gap-2 py-4 px-2 border border-primary/40 bg-primary/35"
+      className="flex shadow-sm shadow-primary/40 items-center gap-2 py-2 md:py-4 px-1 md:px-2 border border-primary/40 bg-primary/35"
     >
       {/* Emoji Picker Button */}
       <div className="relative flex items-center">
@@ -60,7 +60,7 @@ const CommentBox = ({ postId }) => {
         {showEmojiPicker && (
           <div
             ref={emojiPickerRef}
-            className="absolute top-12 -left-3z z-50"
+            className="absolute top-12 -left-3 z-50"
           >
             <EmojiPicker
               onEmojiClick={onEmojiClick}
@@ -68,8 +68,9 @@ const CommentBox = ({ postId }) => {
               emojiStyle="apple"
               skinTonesDisabled
               searchDisabled
-              width={400}
-              height={400}
+              // width={400}
+              // height={400}
+              className=""
             />
           </div>
         )}

@@ -97,12 +97,12 @@ const CreatePost = () => {
   }, []);
 
   return (
-    <div className="max-w-lg bg-accent/10 rounded-lg border-4 border-secondary-foreground/20 shadow-vintage p-4 my-6">
+    <div className="w-full md:max-w-lg bg-accent/10 rounded-lg border-4 border-secondary-foreground/20 shadow-vintage p-2 md:p-4 my-3 md:my-6">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col w-full items-center justify-center gap-3 mb-4">
-          <div className="flex items-center w-full justify-start mb-2 gap-2">
+          <div className="flex items-center w-full justify-start mb-1 md:mb-2 gap-2">
             {/* User Avatar */}
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/70 shrink-0 mt-1">
+            <div className="md:size-10 size-9 rounded-full overflow-hidden border-2 border-primary/70 shrink-0 mt-1">
               {user.profile_picture ? (
                 <img
                   src={user?.profile_picture || "/images/default-avatar.png"}
@@ -123,7 +123,7 @@ const CreatePost = () => {
           {/* Caption Input */}
           <div className="flex-1 w-full px-1">
             <textarea
-              className="w-full min-h-[110px] resize-none p-3 rounded-xl bg-muted/55 placeholder:text-muted-foreground/70 font-typewriter text-base focus:outline-none focus:border-primary/80 transition-colors"
+              className="w-full min-h-[140px] md:min-h-[110px] placeholder:text-sm  md:placeholder:text-base resize-none p-3 rounded-xl bg-muted/55 placeholder:text-muted-foreground/70 font-typewriter text-base focus:outline-none focus:border-primary/80 transition-colors"
               placeholder="Share a memory..."
               {...register("caption")}
             ></textarea>
@@ -185,7 +185,7 @@ const CreatePost = () => {
               {showEmojiPicker && (
                 <div
                   ref={emojiPickerRef}
-                  className="absolute top-10 left-0 z-50"
+                  className="absolute top-10 md:left-0 -left-16 z-50"
                 >
                   <EmojiPicker
                     onEmojiClick={onEmojiClick}
@@ -193,8 +193,8 @@ const CreatePost = () => {
                     emojiStyle="apple"
                     skinTonesDisabled
                     searchDisabled
-                    width={400}
-                    height={400}
+                    // width={400}
+                    // height={400}
                   />
                 </div>
               )}
@@ -205,7 +205,7 @@ const CreatePost = () => {
           <button
             type="submit"
             disabled={isSubmitting || (!caption?.trim() && !selectedFile)}
-            className={`button-vintage !px-2.5 !py-1.5 flex items-center gap-2 text-sm font-typewriter-bold ${
+            className={`button-vintage !px-2.5 !py-1.5 flex items-center gap-2 text-xs md:text-sm font-typewriter-bold ${
               isSubmitting || (!caption?.trim() && !selectedFile)
                 ? "cursor-not-allowed"
                 : "cursor-pointer"

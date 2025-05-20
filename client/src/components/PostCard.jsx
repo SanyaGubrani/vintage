@@ -133,55 +133,58 @@ const PostCard = ({ post }) => {
   return (
     <div className="max-w-lg bg-accent/15 rounded-lg border shadow-md shadow-muted-foreground/40 transition-shadow">
       {/* User info */}
-      <div className="flex items-center gap-3 p-4 border-b border-primary/60 justify-start relative">
-        <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary shrink-0">
-          {post.user?.profile_picture ? (
-            <img
-              src={post.user.profile_picture}
-              alt={post.user?.name || post.user?.username}
-              className="w-full h-full object-cover filter cursor-pointer"
-              onClick={handleUserProfileClick}
-            />
-          ) : (
-            <div
-              className="w-full h-full bg-accent/20 drop-shadow-xl flex items-center justify-center text-primary font-newspaper cursor-pointer"
-              onClick={handleUserProfileClick}
-            >
-              {post.user?.username?.charAt(0).toUpperCase() || "V"}
+      <div className="flex items-center gap-3 p-4 border-b border-primary/60 justify-between relative">
+        <div className="flex gap-2 md:gap-3 md:flex-row flex-col justify-between w-full md:items-center items-start">
+          <div className="flex gap-2 md:gap-3 items-center">
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary shrink-0">
+              {post.user?.profile_picture ? (
+                <img
+                  src={post.user.profile_picture}
+                  alt={post.user?.name || post.user?.username}
+                  className="w-full h-full object-cover filter cursor-pointer"
+                  onClick={handleUserProfileClick}
+                />
+              ) : (
+                <div
+                  className="w-full h-full bg-accent/20 drop-shadow-xl flex items-center justify-center text-primary font-newspaper cursor-pointer"
+                  onClick={handleUserProfileClick}
+                >
+                  {post.user?.username?.charAt(0).toUpperCase() || "V"}
+                </div>
+              )}
             </div>
-          )}
+            <div className="flex-1">
+              <p
+                className="font-typewriter text-sm font-bold cursor-pointer"
+                onClick={handleUserProfileClick}
+              >
+                {post.user?.name || post.user?.username || "Anonymous"}
+              </p>
+              <p className="text-muted-foreground text-xs">
+                @{post.user?.username || "anonymous"}
+              </p>
+            </div>
+          </div>
+          <div className="text-xs text-muted-foreground font-typewriter">
+            {new Date(post.createdAt).toLocaleString(undefined, {
+              dateStyle: "medium",
+              timeStyle: "short",
+            })}
+          </div>
         </div>
-        <div className="flex-1">
-          <p
-            className="font-typewriter text-sm font-bold cursor-pointer"
-            onClick={handleUserProfileClick}
-          >
-            {post.user?.name || post.user?.username || "Anonymous"}
-          </p>
-          <p className="text-muted-foreground text-xs">
-            @{post.user?.username || "anonymous"}
-          </p>
-        </div>
-        <div className="text-xs text-muted-foreground font-typewriter">
-          {new Date(post.createdAt).toLocaleString(undefined, {
-            dateStyle: "medium",
-            timeStyle: "short",
-          })}
-        </div>
-
         {/* Edit post option for current user */}
         {post.user?._id === user?.id && (
           <div className="relative" ref={dropdownRef}>
             <button
-              className="cursor-pointer hover:text-primary size-8 rounded-full flex items-center justify-center hover:bg-muted/30 transition-all"
+              className="cursor-pointer hover:text-primary size-8 rounded-full flex items-start md:items-center justify-center hover:bg-muted/30 transition-all"
               onClick={() => setIsEditOpen(!isEditOpen)}
               aria-label="Post options"
               disabled={isDeleting || showEditForm}
             >
               {isEditOpen ? (
-                <X size={18} className="text-primary" />
+                <X size={18} className="text-primary md:size-6 size-5" />
               ) : (
-                <EllipsisVertical size={18} className="text-primary" />
+                <EllipsisVertical className="text-primary md:size-6 size-5" />
               )}
             </button>
 

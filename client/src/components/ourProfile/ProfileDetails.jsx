@@ -189,7 +189,8 @@ const ProfileDetails = () => {
 
   return (
     <div className="mb-8">
-      <div className="relative w-full h-[240px] bg-secondary/20 rounded-t-lg overflow-hidden">
+      {/* Cover Image */}
+      <div className="relative w-full h-[220px] md:h-[240px] bg-secondary/20 rounded-t-lg overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent pointer-events-none"></div>
         {user?.cover_image ? (
           <div className="h-full">
@@ -203,17 +204,16 @@ const ProfileDetails = () => {
           </div>
         ) : (
           <div className="flex items-center border-2 border-muted-foreground/40 justify-center h-full text-muted-foreground bg-gradient-to-r from-secondary/30 to-accent/15">
-            <p className="font-typewriter text-sm border-4 border-dashed border-muted-foreground/30 p-3 rounded">
+            <p className="font-typewriter text-xs xs:text-sm border-4 border-dashed border-muted-foreground/30 p-2 xs:p-3 rounded">
               Add cover image
             </p>
           </div>
         )}
-
         {/* Cover image edit option  */}
         {isEditing && (
-          <div className="absolute bottom-4 right-4">
-            <label className="p-3 bg-primary text-white hover:bg-primary/90 rounded-full cursor-pointer flex items-center justify-center shadow-vintage">
-              <Camera size={20} />
+          <div className="absolute bottom-2 right-2 xs:bottom-4 xs:right-4">
+            <label className="p-2 xs:p-3 bg-primary text-white hover:bg-primary/90 rounded-full cursor-pointer flex items-center justify-center shadow-vintage">
+              <Camera size={18} className="xs:size-5" />
               <input
                 type="file"
                 ref={coverInputRef}
@@ -229,21 +229,21 @@ const ProfileDetails = () => {
         {!isEditing && (
           <button
             onClick={() => setIsEditing(true)}
-            className="absolute top-4 right-4 bg-primary/80 hover:bg-primary text-sm font-typewriter text-white transition-transform duration-200 ease-in flex justify-center items-center gap-2 py-2 px-3 cursor-pointer rounded-lg shadow-vintage"
+            className="absolute top-2 right-2 xs:top-4 xs:right-4 bg-primary/85 hover:bg-primary text-[0.8rem] xs:text-sm font-typewriter text-white transition-transform duration-200 ease-in flex justify-center items-center gap-1 xs:gap-2 py-1.5 xs:py-2 px-2 xs:px-3 cursor-pointer rounded-lg shadow-vintage"
           >
-            <Pencil size={20} />
+            <Pencil size={16} className="xs:size-5" />
             <span className="font-medium text-center">Edit Profile</span>
           </button>
         )}
       </div>
 
       {/* Profile Info Section*/}
-      <div className="bg-gradient-to-b from-accent/10 to-secondary/5 rounded-b-lg border-4 border-t-0 border-secondary-foreground/20 shadow-vintage p-5">
-        <div className="flex">
+      <div className="bg-gradient-to-b from-accent/10 to-secondary/5 rounded-b-lg border-4 border-t-0 border-secondary-foreground/20 shadow-vintage p-3 xs:p-5">
+        <div className="flex flex-col md:flex-row">
           {/* Profile Picture*/}
-          <div className="relative mr-6 mt-[-80px] flex-shrink-0">
+          <div className="relative mx-auto md:mx-0 md:mr-6 mt-[-60px] xs:mt-[-80px] flex-shrink-0">
             <div className="absolute -inset-1.5 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-sm"></div>
-            <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-background bg-muted shadow-vintage">
+            <div className="relative size-20 md:size-28 rounded-full overflow-hidden border-4 border-background bg-muted shadow-vintage">
               {user?.profile_picture ? (
                 <img
                   src={user.profile_picture}
@@ -251,7 +251,7 @@ const ProfileDetails = () => {
                   className="w-full h-full object-cover sepia-[0.1]"
                 />
               ) : (
-                <div className="flex items-center font-typewriter justify-center h-full bg-gradient-to-br from-primary/20 to-secondary/20 text-primary font-bold text-4xl">
+                <div className="flex items-center font-typewriter justify-center h-full bg-gradient-to-br from-primary/20 to-secondary/20 text-primary font-bold text-xl xs:text-2xl md:text-4xl">
                   {user?.username?.charAt(0).toUpperCase() || "V"}
                 </div>
               )}
@@ -259,8 +259,8 @@ const ProfileDetails = () => {
               {/* Profile picture edit option */}
               {isEditing && (
                 <label className="absolute inset-0 flex items-center justify-center bg-black/50 cursor-pointer rounded-full group">
-                  <div className="bg-primary/80 p-2.5 rounded-full transform transition-transform group-hover:scale-110">
-                    <Camera size={24} className="text-white" />
+                  <div className="bg-primary/80 p-2 xs:p-2.5 rounded-full transform transition-transform group-hover:scale-110">
+                    <Camera size={18} className="xs:size-6 text-white" />
                   </div>
                   <input
                     type="file"
@@ -275,23 +275,22 @@ const ProfileDetails = () => {
           </div>
 
           {/* Profile Info */}
-          <div className="flex-grow">
+          <div className="flex-grow mt-4 md:mt-0">
             {isEditing ? (
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-newspaper text-primary/90">
+                  <h3 className="text-xl font-newspaper text-primary/90">
                     Edit Your Profile
                   </h3>
                 </div>
-
                 <div className="space-y-3">
                   <div>
-                    <label className="block text-sm font-typewriter mb-1 text-muted-foreground">
+                    <label className="block text-xs xs:text-sm font-typewriter mb-1 text-muted-foreground">
                       Name
                     </label>
                     <input
                       {...register("name", { required: "Name is required" })}
-                      className="w-full p-2.5 border-2 border-primary/30 rounded bg-muted/35 font-typewriter focus:outline-none focus:border-primary/60 shadow-sm"
+                      className="w-full p-2 xs:p-2.5 border-2 border-primary/30 rounded bg-muted/35 font-typewriter focus:outline-none focus:border-primary/60 shadow-sm"
                       placeholder="Your Name"
                     />
                     {errors.name && (
@@ -301,9 +300,8 @@ const ProfileDetails = () => {
                       </p>
                     )}
                   </div>
-
                   <div>
-                    <label className="block text-sm font-typewriter mb-1 text-muted-foreground">
+                    <label className="block text-xs xs:text-sm font-typewriter mb-1 text-muted-foreground">
                       Username
                     </label>
                     <div className="relative">
@@ -314,7 +312,7 @@ const ProfileDetails = () => {
                         {...register("username", {
                           required: "Username is required",
                         })}
-                        className="w-full p-2.5 pl-7 border-2 border-primary/30 rounded bg-muted/20 font-typewriter focus:outline-none focus:border-primary/60 shadow-sm"
+                        className="w-full p-2 xs:p-2.5 pl-7 border-2 border-primary/30 rounded bg-muted/20 font-typewriter focus:outline-none focus:border-primary/60 shadow-sm"
                         placeholder="username"
                       />
                     </div>
@@ -325,10 +323,9 @@ const ProfileDetails = () => {
                       </p>
                     )}
                   </div>
-
                   <div>
                     <div className="flex justify-between items-center mb-1">
-                      <label className="block text-sm font-typewriter text-muted-foreground">
+                      <label className="block text-xs xs:text-sm font-typewriter text-muted-foreground">
                         Bio
                       </label>
                       <span className="text-xs font-typewriter text-muted-foreground">
@@ -342,7 +339,7 @@ const ProfileDetails = () => {
                           message: "Bio cannot exceed 100 characters",
                         },
                       })}
-                      className="w-full p-3 border-2 border-primary/30 rounded bg-muted/20 font-typewriter focus:outline-none focus:border-primary/60 min-h-[80px] resize-none shadow-sm"
+                      className="w-full p-2 xs:p-3 border-2 border-primary/30 rounded bg-muted/20 font-typewriter focus:outline-none focus:border-primary/60 min-h-[120px] resize-none shadow-sm"
                       placeholder="Tell us about yourself..."
                       maxLength={100}
                     />
@@ -354,20 +351,18 @@ const ProfileDetails = () => {
                     )}
                   </div>
                 </div>
-
-                <div className="flex justify-end gap-3 pt-2">
+                <div className="flex justify-end gap-2 xs:gap-3 pt-2">
                   <button
                     type="button"
                     onClick={handleCancelEdit}
-                    className="py-2 px-5 border-2 cursor-pointer border-primary/30 rounded font-typewriter hover:bg-muted/90 transition-colors shadow-sm"
+                    className="py-1.5 xs:py-2 px-3 xs:px-5 border-2 cursor-pointer border-primary/30 rounded font-typewriter hover:bg-muted/90 transition-colors shadow-sm"
                   >
                     Cancel
                   </button>
-
                   <button
                     type="submit"
                     disabled={updatingProfile || (!isDirty && !imagesChanged)}
-                    className={`bg-primary text-white py-2 px-3 font-typewriter rounded flex items-center gap-1.5 shadow-vintage ${
+                    className={`bg-primary text-white py-1.5 xs:py-2 px-3 xs:px-4 font-typewriter rounded flex items-center gap-1.5 shadow-vintage ${
                       (!isDirty && !imagesChanged) || updatingProfile
                         ? "opacity-60 cursor-not-allowed"
                         : "hover:bg-primary/90"
@@ -375,12 +370,12 @@ const ProfileDetails = () => {
                   >
                     {updatingProfile ? (
                       <>
-                        <Loader2 size={25} className="animate-spin" />
+                        <Loader2 size={20} className="xs:size-[25px] animate-spin" />
                         <span>Updating...</span>
                       </>
                     ) : (
                       <>
-                        <Check size={25} strokeWidth={3} />
+                        <Check size={20} className="xs:size-[25px]" strokeWidth={3} />
                         <span>Save Changes</span>
                       </>
                     )}
@@ -390,33 +385,31 @@ const ProfileDetails = () => {
             ) : (
               <div>
                 <div>
-                  <h3 className="text-2xl font-newspaper text-primary/90 mb-0.5">
+                  <h3 className="text-xl md:text-2xl font-newspaper text-primary/90 mb-0.5">
                     {user?.name || user?.username || "Vintage User"}
                   </h3>
                   <p className="text-muted-foreground text-sm font-typewriter">
                     @{user?.username || "username"}
                   </p>
                 </div>
-
-                <div className="mt-4">
+                <div className="mt-3 xs:mt-4">
                   <div className="relative">
-                    <div className="absolute top-0 left-0 w-[6px] h-full bg-gradient-to-b from-primary/20 via-primary/50 to-primary-foreground/50"></div>
-                    <p className="font-typewriter text-sm whitespace-pre-wrap pl-4 py-2 bg-muted/10 italic">
+                    <div className="absolute top-0 left-0 w-[4px] xs:w-[6px] h-full bg-gradient-to-b from-primary/20 via-primary/50 to-primary-foreground/50"></div>
+                    <p className="font-typewriter text-[0.8rem] whitespace-pre-wrap pl-3 xs:pl-4 py-2 bg-muted/10 italic">
                       {user?.bio || "No bio available"}
                     </p>
                   </div>
                 </div>
-
-                <div className="flex gap-8 mt-2 pt-4">
+                <div className="flex flex-row gap-6 mt-1 pt-4">
                   <button
-                    className="flex items-center gap-3 cursor-pointer"
+                    className="flex items-center gap-2 xs:gap-3 cursor-pointer"
                     onClick={() => setShowFollowers(true)}
                   >
-                    <div className="p-2 rounded-full bg-accent/25">
-                      <Users size={27} className="text-primary/95" />
+                    <div className="p-2.5 rounded-full bg-accent/25">
+                      <Users size={23} className="xs:size-[27px] text-primary/95" />
                     </div>
                     <div>
-                      <p className="font-newspaper flex flex-col items-start text-xl">
+                      <p className="font-newspaper flex flex-col items-start text-lg xs:text-xl">
                         {isLoadingFollowers ? "..." : followers.count}
                       </p>
                       <p className="text-xs font-typewriter text-muted-foreground">
@@ -424,16 +417,15 @@ const ProfileDetails = () => {
                       </p>
                     </div>
                   </button>
-
                   <button
-                    className="flex items-center gap-3 cursor-pointer"
+                    className="flex items-center gap-2 xs:gap-3 cursor-pointer"
                     onClick={() => setShowFollowing(true)}
                   >
-                    <div className="p-2 rounded-full bg-accent/25">
-                      <UserCheck size={27} className="text-primary/95" />
+                    <div className="p-2.5 rounded-full bg-accent/25">
+                      <UserCheck size={23} className="xs:size-[27px] text-primary/95" />
                     </div>
                     <div>
-                      <p className="font-newspaper flex flex-col items-start text-xl">
+                      <p className="font-newspaper flex flex-col items-start text-lg xs:text-xl">
                         {isLoadingFollowing ? "..." : following.count}
                       </p>
                       <p className="text-xs font-typewriter text-muted-foreground">
@@ -442,7 +434,6 @@ const ProfileDetails = () => {
                     </div>
                   </button>
                 </div>
-
                 {/* Followers Overlay */}
                 <FollowListOverlay
                   isOpen={showFollowers}
@@ -452,7 +443,6 @@ const ProfileDetails = () => {
                   isLoading={isLoadingFollowers}
                   currentUserId={user?.id}
                 />
-
                 {/* Following Overlay */}
                 <FollowListOverlay
                   isOpen={showFollowing}
@@ -467,7 +457,6 @@ const ProfileDetails = () => {
           </div>
         </div>
       </div>
-
       {/* Loading indicators if any image is being uploaded */}
       {(updatingProfilePicture || updatingCoverImage) && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">

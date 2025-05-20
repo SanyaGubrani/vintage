@@ -73,7 +73,7 @@ const CommentList = ({ postId }) => {
   }
 
   return (
-    <div className="px-4 py-1 space-y-0">
+    <div className="px-3 md:px-4 py-1 space-y-0">
       {comments.map((comment, index) => (
         <div key={comment._id}>
           <div className="flex gap-3 py-4">

@@ -46,7 +46,7 @@ const CommentsPage = () => {
       <div className="mx-auto w-full">
         <PostCard post={currentPost} />
         <div className="bg-accent/15 rounded-lg border max-w-lg shadow-md mt-4">
-        <h3 className="text-xl font-newspaper p-2 tracking-wider text-stone-600">Comments</h3>
+        <h3 className="text-lg md:text-xl font-newspaper p-2 tracking-wider text-stone-600">Comments</h3>
           <CommentBox postId={postId} />
           <CommentList postId={postId} />
         </div>
