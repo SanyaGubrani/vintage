@@ -11,6 +11,7 @@ import UserProfilePage from "./pages/UserProfilePage";
 import Bookmarks from "./pages/Bookmarks";
 import useScrollToTop from "./hooks/useScrollToTop";
 import CommentsPage from "./pages/Comments";
+import Messages from "./pages/Messages";
 
 const App = () => {
   const location = useLocation();
@@ -55,6 +56,7 @@ const App = () => {
           <Route path="/user/:userId" element={<UserProfilePage />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
           <Route path="/comments/:postId" element={<CommentsPage />} />
+          <Route path="/messages" element={<Messages />} />
         </Routes>
 
         <Toaster

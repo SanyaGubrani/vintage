@@ -29,7 +29,7 @@ const LeftSidebar = ({ currentUser }) => {
   const menuItems = [
     { icon: Home, text: "Home", path: "/" },
     { icon: Bell, text: "Notifications", path: "#" },
-    { icon: MessageSquare, text: "Messages", path: "#" },
+    { icon: MessageSquare, text: "Messages", path: "/messages" },
     { icon: Bot, text: "Vinty AI", path: "#" },
     { icon: Bookmark, text: "Bookmarks", path: "/bookmarks" },
     { icon: UserIcon, text: "Profile", path: "/profile" },
