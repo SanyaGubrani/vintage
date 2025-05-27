@@ -3,7 +3,6 @@ import { X } from "lucide-react";
 import { useChatStore } from "../store/useChatStore";
 import { useNavigate } from "react-router-dom";
 
-
 const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useChatStore();
   const navigate = useNavigate();
@@ -34,7 +33,10 @@ const ChatHeader = () => {
             )}
           </div>
           <div className="flex flex-col items-start">
-            <span className="text-lg font-newspaper text-primary hover:opacity-80 cursor-pointer" onClick={handleUserProfileClick}>
+            <span
+              className="text-lg font-newspaper text-primary hover:opacity-80 cursor-pointer"
+              onClick={handleUserProfileClick}
+            >
               {selectedUser.name || selectedUser.username || "Vintage User"}
             </span>
             <span className="text-xs text-muted-foreground font-typewriter">
@@ -48,7 +50,7 @@ const ChatHeader = () => {
           className="p-2 rounded-full cursor-pointer hover:bg-muted-foreground/50 transition-colors border border-primary/40 ml-2"
           aria-label="Close chat"
         >
-          <X className="text-primary size-6" strokeWidth={2.5}/>
+          <X className="text-primary size-6" strokeWidth={2.5} />
         </button>
       </div>
     </div>

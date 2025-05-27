@@ -105,6 +105,23 @@
   }
 
   body {
+    @apply overflow-y-auto;
+  }
+  
+  /* Custom Scrollbar Styling */
+  body::-webkit-scrollbar {
+    @apply w-3;
+  }
+  
+  body::-webkit-scrollbar-track {
+    @apply bg-stone-300;
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    @apply bg-stone-500 ;
+  }
+
+  body {
     @apply bg-background;
     min-height: 100vh;
     position: relative;
@@ -253,6 +270,12 @@
   --epr-text-color: #46251ae5 !important;
   border: 3px solid #723d2c82 !important;
 }
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+.animate-slideInRight { animation: slideInRight 0.3s ease; }
 
 
 @layer base {

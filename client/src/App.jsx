@@ -12,6 +12,8 @@ import Bookmarks from "./pages/Bookmarks";
 import useScrollToTop from "./hooks/useScrollToTop";
 import CommentsPage from "./pages/Comments";
 import Messages from "./pages/Messages";
+import Notifications from "./pages/Notifications";
+import VintyAI from "./pages/VintyAI";
 
 const App = () => {
   const location = useLocation();
@@ -57,6 +59,8 @@ const App = () => {
           <Route path="/bookmarks" element={<Bookmarks />} />
           <Route path="/comments/:postId" element={<CommentsPage />} />
           <Route path="/messages" element={<Messages />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/vinty" element={<VintyAI />} />{" "}
         </Routes>
 
         <Toaster
@@ -71,7 +75,6 @@ const App = () => {
           }}
         />
       </div>
-      <Footer />
     </div>
   );
 };

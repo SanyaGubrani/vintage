@@ -11,6 +11,8 @@ import {
   X as CloseIcon,
 } from "lucide-react";
 import ProfileCard from "./ProfileCard";
+import { IoMenu } from "react-icons/io5";
+
 
 const LeftSidebar = ({ currentUser }) => {
   const [open, setOpen] = useState(false);
@@ -28,10 +30,10 @@ const LeftSidebar = ({ currentUser }) => {
 
   const menuItems = [
     { icon: Home, text: "Home", path: "/" },
-    { icon: Bell, text: "Notifications", path: "#" },
+    { icon: Bot, text: "Vinty AI", path: "/vinty" },
     { icon: MessageSquare, text: "Messages", path: "/messages" },
-    { icon: Bot, text: "Vinty AI", path: "#" },
     { icon: Bookmark, text: "Bookmarks", path: "/bookmarks" },
+    { icon: Bell, text: "Notifications", path: "/notifications" },
     { icon: UserIcon, text: "Profile", path: "/profile" },
   ];
 
@@ -39,17 +41,17 @@ const LeftSidebar = ({ currentUser }) => {
     <>
       {/* Hamburger for mobile */}
       <button
-        className="fixed top-4 left-4 z-50 bg-[#8C7A64] p-2 rounded-lg shadow-lg xl:hidden"
+        className="fixed top-4 left-4 z-50 bg-muted-foreground/80 cursor-pointer hover:bg-[#7d6d58] p-2 rounded-lg shadow-lg xl:hidden"
         onClick={() => setOpen(true)}
         aria-label="Open sidebar"
       >
-        <MenuIcon size={28} className="text-white" />
+        <IoMenu size={30} className="text-white" />
       </button>
 
       {/* Overlay */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-xs z-40 xl:hidden"
+          className="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 xl:hidden"
           onClick={() => setOpen(false)}
         />
       )}
@@ -57,27 +59,34 @@ const LeftSidebar = ({ currentUser }) => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 left-0 overflow-y-auto z-50 opacity-100 h-full w-full md:w-[80vw] max-w-xs bg-[#8C7A64] border-r-2 border-primary/30 shadow-xl
+          fixed top-0 left-0 overflow-y-auto z-50 opacity-100 
+          w-full h-full md:w-[80vw] max-w-xs bg-[#8C7A64]
+           border-r-2 border-primary/30 shadow-xl
           transform transition-transform duration-300 ease-in-out
+         [&::-webkit-scrollbar]:w-2
+          [&::-webkit-scrollbar-track]:rounded-none
+          [&::-webkit-scrollbar-track]:bg-[#776653]
+          [&::-webkit-scrollbar-thumb]:rounded-none
+          [&::-webkit-scrollbar-thumb]:bg-[#d1c1ac] 
           ${open ? "translate-x-0" : "-translate-x-full"}
           xl:static xl:translate-x-0 xl:w-[380px] xl:max-w-none xl:h-auto xl:shadow-none xl:border-0
         `}
         style={{ boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.5)" }}
       >
         {/* Close button for mobile */}
-        <div className="flex xl:hidden justify-end p-3">
+        <div className="flex xl:hidden justify-start p-3 ">
           <button
             onClick={() => setOpen(false)}
             aria-label="Close sidebar"
-            className="p-1 rounded-full hover:bg-accent/30 transition"
+            className="p-1 rounded-full cursor-pointer hover:bg-accent/30 transition z-40"
           >
             <CloseIcon size={32} className="text-white" />
           </button>
         </div>
-        <div className="space-y-6 px-5 py-4 z-50">
+        <div className="space-y-6 px-5 py-1 md:py-4 z-50">
           {/* Navigation Menu */}
           <div className="bg-[#8C7A64] z-50">
-            <h2 className="text-xl font-display font-bold mb-4 text-secondary-foreground/90 text-center border-b-2 pb-2">
+            <h2 className="text-2xl font-display font-bold mb-4 text-secondary-foreground/90 text-center border-b-2 pb-2">
               Bulletin Board
             </h2>
             <nav className="flex flex-col gap-4">

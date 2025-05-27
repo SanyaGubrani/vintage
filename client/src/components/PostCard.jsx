@@ -131,7 +131,7 @@ const PostCard = ({ post }) => {
   };
 
   return (
-    <div className="max-w-lg bg-accent/15 rounded-lg border shadow-md shadow-muted-foreground/40 transition-shadow">
+    <div className="relative max-w-lg bg-accent/15 rounded-lg border shadow-md shadow-muted-foreground/40 transition-shadow">
       {/* User info */}
       <div className="flex items-center gap-3 p-4 border-b border-primary/60 justify-between relative">
         <div className="flex gap-2 md:gap-3 md:flex-row flex-col justify-between w-full md:items-center items-start">
