@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useChatStore } from "../store/useChatStore";
-import { Image, Send, X, Smile } from "lucide-react";
+import { Image, Send, X, Smile, Loader } from "lucide-react";
 import EmojiPicker from "emoji-picker-react";
 import toast from "react-hot-toast";
 
 const MessageInput = () => {
   const [text, setText] = useState("");
+  const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [isSending, setIsSending] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const fileInputRef = useRef(null);
   const inputRef = useRef(null);
@@ -19,6 +21,7 @@ const MessageInput = () => {
       toast.error("Please select an image file");
       return;
     }
+    setImageFile(file); // Store the File object directly
     const reader = new FileReader();
     reader.onloadend = () => setImagePreview(reader.result);
     reader.readAsDataURL(file);
@@ -31,17 +34,26 @@ const MessageInput = () => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (!text.trim() && !imagePreview) return;
+    if (!text.trim() && !imageFile) return;
     try {
-      await sendMessage({
-        text: text.trim(),
-        image: imagePreview,
-      });
+      setIsSending(true);
+      let dataToSend;
+      if (imageFile) {
+        dataToSend = new FormData();
+        dataToSend.append("message", text.trim());
+        dataToSend.append("media", imageFile);
+      } else {
+        dataToSend = { message: text.trim() };
+      }
+      await sendMessage(dataToSend);
       setText("");
       setImagePreview(null);
+      setImageFile(null);
       if (fileInputRef.current) fileInputRef.current.value = "";
     } catch (error) {
       toast.error("Failed to send message");
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -80,7 +92,7 @@ const MessageInput = () => {
   }, [showEmojiPicker]);
 
   return (
-    <div className="p-4 w-full bg-background border-t border-primary/20">
+    <div className="p-2.5 md:p-4 w-full bg-background border-t border-primary/20">
       {imagePreview && (
         <div className="mb-3 flex items-center gap-2">
           <div className="relative">
@@ -101,69 +113,84 @@ const MessageInput = () => {
         </div>
       )}
 
-      <form onSubmit={handleSendMessage} className="flex items-end gap-2">
-        <div className="flex-1 flex gap-2 items-end">
-          {/* Emoji Button */}
-          <div className="relative flex items-center">
+      <div className="relative">
+        {isSending && (
+          <div className="absolute inset-0 flex items-center justify-center bg-background/80 z-50">
+            <span className="animate-spin text-primary/75">
+              <Loader className="size-6" />
+            </span>
+            <span className="ml-2 text-primary/75 font-typewriter">
+              Sending...
+            </span>
+          </div>
+        )}
+        <form onSubmit={handleSendMessage} className="flex items-end gap-2">
+          <div className="flex-1 flex gap-2 items-end">
+            {/* Emoji Button */}
+            <div className="relative flex items-center">
+              <button
+                type="button"
+                aria-label="emoji-btn"
+                className="p-1.5 md:p-2 rounded-md border border-primary/30 bg-muted/40 hover:bg-muted-foreground/20 transition-colors text-primary"
+                onClick={() => setShowEmojiPicker((v) => !v)}
+              >
+                <Smile size={22} />
+              </button>
+              {showEmojiPicker && (
+                <div
+                  ref={emojiPickerRef}
+                  className="absolute bottom-12 left-0 z-50"
+                >
+                  <EmojiPicker
+                    onEmojiClick={handleEmojiClick}
+                    theme="light"
+                    emojiStyle="native"
+                    width={320}
+                    height={400}
+                    skinTonesDisabled
+                    searchDisabled
+                  />
+                </div>
+              )}
+            </div>
+            {/* Image Button */}
             <button
               type="button"
-              aria-label="emoji-btn"
-              className="p-2 rounded-md border border-primary/30 bg-muted/40 hover:bg-muted-foreground/20 transition-colors text-primary"
-              onClick={() => setShowEmojiPicker((v) => !v)}
+              className={`p-1.5 md:p-2 rounded-md border border-primary/30 bg-muted/40 hover:bg-muted-foreground/20 transition-colors text-primary`}
+              onClick={() => fileInputRef.current?.click()}
+              aria-label="Attach image"
             >
-              <Smile size={22} />
+              <Image size={22} />
             </button>
-            {showEmojiPicker && (
-              <div ref={emojiPickerRef} className="absolute top-12 left-0 z-50">
-                <EmojiPicker
-                  onEmojiClick={handleEmojiClick}
-                  theme="light"
-                  emojiStyle="native"
-                  width={320}
-                  height={400}
-                  skinTonesDisabled
-                  searchDisabled
-                />
-              </div>
-            )}
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              ref={fileInputRef}
+              onChange={handleImageChange}
+            />
+            {/* Message Input */}
+            <input
+              ref={inputRef}
+              type="text"
+              className="w-full rounded-lg border-2 border-primary/30 bg-muted/20 px-1.5 md:px-3 py-1.5 md:py-2 font-typewriter text-sm focus:outline-none focus:border-primary/60 shadow-sm"
+              placeholder="Type a message..."
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              autoComplete="off"
+            />
           </div>
-          {/* Image Button */}
+          {/* Send Button */}
           <button
-            type="button"
-            className={`p-2 rounded-md border border-primary/30 bg-muted/40 hover:bg-muted-foreground/20 transition-colors text-primary`}
-            onClick={() => fileInputRef.current?.click()}
-            aria-label="Attach image"
+            type="submit"
+            className="p-1.5 md:p-2 size-7 md:size-9 items-center flex rounded-full bg-primary text-muted hover:bg-primary/90 transition-colors shadow-vintage disabled:opacity-70 disabled:cursor-not-allowed"
+            disabled={!text.trim() && !imagePreview}
+            aria-label="Send message"
           >
-            <Image size={22} />
+            <Send />
           </button>
-          <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            ref={fileInputRef}
-            onChange={handleImageChange}
-          />
-          {/* Message Input */}
-          <input
-            ref={inputRef}
-            type="text"
-            className="w-full rounded-lg border-2 border-primary/30 bg-muted/20 px-3 py-2 font-typewriter text-sm focus:outline-none focus:border-primary/60 shadow-sm"
-            placeholder="Type a message..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            autoComplete="off"
-          />
-        </div>
-        {/* Send Button */}
-        <button
-          type="submit"
-          className="p-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-colors shadow-vintage disabled:opacity-60 disabled:cursor-not-allowed"
-          disabled={!text.trim() && !imagePreview}
-          aria-label="Send message"
-        >
-          <Send size={22} />
-        </button>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
