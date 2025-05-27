@@ -1,8 +1,9 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
+import { useAuthStore } from "./useAuthStore";
 
-export const useChatStore = create((set) => ({
+export const useChatStore = create((set, get) => ({
   messages: [],
   users: [],
   selectedUser: null,
@@ -25,7 +26,7 @@ export const useChatStore = create((set) => ({
   getMessages: async (userId) => {
     set({ isMessagesLoading: true });
     try {
-      const res = await  axiosInstance.get(`message/${userId}`);
+      const res = await axiosInstance.get(`message/${userId}`);
       set({ messages: res.data.data });
     } catch (error) {
       console.log(
@@ -38,6 +39,48 @@ export const useChatStore = create((set) => ({
     }
   },
 
-  //optimize this
+  sendMessage: async (messageData) => {
+    const { selectedUser, messages } = get();
+
+    try {
+      const res = await axiosInstance.post(
+        `/message/send/${selectedUser._id}`,
+        messageData
+      );
+      set({ messages: [...messages, res.data.data] });
+    } catch (error) {
+      console.log(
+        "Error while sending messages: ",
+        error.response.data.message
+      );
+      toast.error("Error while sending messages");
+    }
+  },
+
+  subscribeToMessages: () => {
+    const { selectedUser } = get();
+    if (!selectedUser) return;
+
+    const socket = useAuthStore.getState().socket;
+
+    socket.on("newMessage", (newMessage) => {
+      // Show messages where the selected user is either the sender or receiver
+      const isRelevant =
+        newMessage.sender === selectedUser._id ||
+        newMessage.receiver === selectedUser._id;
+
+      if (!isRelevant) return;
+
+      set({
+        messages: [...get().messages, newMessage],
+      });
+    });
+  },
+
+  unsubscribeFromMessages: () => {
+    const socket = useAuthStore.getState().socket;
+    socket.off("newMessage");
+  },
+
   setSelectedUser: (selectedUser) => set({ selectedUser }),
 }));

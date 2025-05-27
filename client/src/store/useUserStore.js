@@ -13,7 +13,6 @@ export const useUserStore = create((set) => ({
     try {
       const res = await axiosInstance.get("/user/profile");
       set({ user: res.data.data });
-      console.log("User data response: ", res.data.data);
     } catch (error) {
       console.log("Error in fetching user data:", error);
       set({ user: null });
@@ -28,7 +27,6 @@ export const useUserStore = create((set) => ({
       const res = await axiosInstance.post("/user/updateProfile", data);
       set({ user: res.data.data });
       toast.success("Profile Updated successfully");
-      console.log("Update user profile: ", res.data.data);
       return true;
     } catch (error) {
       console.error("Error while updating details", error);
@@ -45,7 +43,6 @@ export const useUserStore = create((set) => ({
       const res = await axiosInstance.post("/user/profilePicture", data);
       set({ user: res.data.data });
       toast.success("Profile Picture updated successfully");
-      console.log("profile picture: ", res.data);
 
     } catch (error) {
       toast.error("Error while uploading profile picture");
@@ -61,7 +58,6 @@ export const useUserStore = create((set) => ({
       const res = await axiosInstance.post("/user/coverImage", data);
       set({ user: res.data.data });
       toast.success("Cover Image updated successfully");
-      console.log("Cover Image: ", res.data);
     } catch (error) {
       toast.error("Error while uploading Cover Image");
       console.log("Error while uploading Cover Image: ", error);
