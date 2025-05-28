@@ -149,6 +149,7 @@ const MessageInput = () => {
                     height={400}
                     skinTonesDisabled
                     searchDisabled
+                    
                   />
                 </div>
               )}

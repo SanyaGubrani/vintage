@@ -59,7 +59,7 @@ const LeftSidebar = ({ currentUser }) => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 left-0 overflow-y-auto z-50 opacity-100 
+          fixed top-0 left-0 pb-3 md:pb-0 overflow-y-auto z-50 opacity-100 
           w-full h-full md:w-[80vw] max-w-xs bg-[#8C7A64]
            border-r-2 border-primary/30 shadow-xl
           transform transition-transform duration-300 ease-in-out
