@@ -1,6 +1,4 @@
 import dotenv from "dotenv";
-dotenv.config();
-
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -19,6 +17,13 @@ import followRouter from "./routes/follow.route.js";
 import messageRouter from "./routes/message.route.js";
 import { app, server } from "./utils/soket.js";
 import likePostRouter from "./routes/like.route.js";
+import path from "path";
+
+const envFile =
+  process.env.NODE_ENV === "production" ? ".env.production" : ".env";
+
+const envPath = path.resolve(process.cwd(), envFile);
+dotenv.config({ path: envPath });
 
 // Configurations
 // const app = express();

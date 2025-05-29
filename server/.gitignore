@@ -11,6 +11,7 @@ logs/
 
 # Environment variables
 .env
+.env.production
 
 # Build output
 dist/
