@@ -4,6 +4,7 @@ import { Eye, EyeOff, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useAuthStore } from "../store/useAuthStore";
 import { Loader2 } from "lucide-react";
+import Footer from "../components/Footer";
 
 const Auth = () => {
   const [isLoginActive, setIsLoginActive] = useState(true);
@@ -50,7 +51,7 @@ const Auth = () => {
   });
 
   return (
-    <div className="w-full min-h-[calc(100vh-80px)] relative overflow-hidden">
+    <div className="w-full min-h-[calc(100vh-80px)] relative overflow-hidden gap-10 flex flex-col">
       {/* Decorative Leaves */}
       <div className="absolute sm:fixed top-0 left-0 -translate-x-1/4 -translate-y-1/3 w-72 h-72 opacity-60 z-0">
         <img
@@ -410,6 +411,7 @@ const Auth = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

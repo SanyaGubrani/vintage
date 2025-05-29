@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
+import Footer from "../components/Footer";
 
 const Notifications = () => {
   return (
@@ -33,6 +34,7 @@ const Notifications = () => {
           </p>
         </div>
       </div>
+      <Footer />
     </Layout>
   );
 };

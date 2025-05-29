@@ -12,7 +12,6 @@ import { useUserStore } from "../store/useUserStore";
 function VintyAI() {
   const { user } = useUserStore();
   const userId = user?.id || user?._id || "guest";
-  
   const useVintyStore = React.useMemo(() => createVintyStore(userId), [userId]);
   const { messages, setMessages, addMessage, clearMessages } = useVintyStore();
   const [userInput, setUserInput] = useState("");
