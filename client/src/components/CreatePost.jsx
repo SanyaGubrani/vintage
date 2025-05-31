@@ -97,12 +97,12 @@ const CreatePost = () => {
   }, []);
 
   return (
-    <div className="w-full md:max-w-lg bg-accent/10 rounded-lg border-4 border-secondary-foreground/20 shadow-vintage p-2 md:p-4 my-3 md:my-6">
+    <div className="w-full bg-accent/10 rounded-lg border-4 border-secondary-foreground/20 shadow-vintage p-2 md:p-4 my-3 md:my-6">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col w-full items-center justify-center gap-3 mb-4">
           <div className="flex items-center w-full justify-start mb-1 md:mb-2 gap-2">
             {/* User Avatar */}
-            <div className="md:size-10 size-9 rounded-full overflow-hidden border-2 border-primary/70 shrink-0 mt-1">
+            <div className="md:size-12 size-9 rounded-full overflow-hidden border-2 border-primary/70 shrink-0 mt-1">
               {user.profile_picture ? (
                 <img
                   src={user?.profile_picture || "/images/default-avatar.png"}

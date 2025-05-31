@@ -44,7 +44,7 @@ const ProfileCard = () => {
     >
       <div className="flex flex-col items-center">
         {/* avatar */}
-        <div className="size-12 lg:size-16 rounded-full overflow-hidden border-3 border-primary mb-2">
+        <div className="size-12 lg:size-18 rounded-full overflow-hidden border-3 border-primary mb-2">
           {user.profile_picture ? (
             <img
               src={user.profile_picture}
@@ -60,33 +60,33 @@ const ProfileCard = () => {
       </div>
 
       {/* name */}
-      <h3 className="text-center text-base lg:text-lg font-typewriter-bold">
+      <h2 className="text-center text-xl font-typewriter-bold">
         {user.name || "What's your name?"}
-      </h3>
+      </h2>
       {/* username */}
       <p className="text-center text-sm  font-medium text-muted-foreground font-newspaper">
         @{user.username}
       </p>
       {/* bio */}
-      <div className="mt-2 text-center border rounded border-muted-foreground/40 p-1 m-2">
-        <p className="font-typewriter break-words text-xs text-muted-foreground">
+      <div className="my-2 text-center border rounded border-muted-foreground/40 mx-2 p-1 ">
+        <p className="font-newspaper tracking-wide break-words !text-sm text-muted-foreground">
           {user.bio || "Say something bout yourself, eh?"}
         </p>
       </div>
       {/* edit profile */}
-      <div className="mt-3 flex justify-center px-4">
+      <div className="mt-3 flex justify-center px-2">
         <Link
-          className="button-vintage text-center !w-full !py-1 lg:!py-1.5 !px-2 !text-xs"
+          className="button-vintage text-center !w-full !py-1 lg:!py-1.5 !px-2 !text-base "
           to="/profile"
         >
           Profile
         </Link>
       </div>
       {/* Logout User */}
-      <div className="mt-3 flex px-4">
+      <div className="mt-3 flex px-2">
         <button
           onClick={handleLogout}
-          className="button-vintage w-full !bg-[#403c28]/75 !border-[#4f463b] !py-1 lg:!py-1.5 !px-2 !text-xs font-typewriter-bold"
+          className="button-vintage w-full !bg-[#403c28]/75 !border-[#4f463b] !py-1 lg:!py-1.5 !px-2 !text-base font-typewriter-bold"
         >
           Logout
         </button>

@@ -59,13 +59,13 @@ const Feed = () => {
   return (
     <div className="">
       <div className="flex items-center mb-4">
-        <div className="bg-accent/10 text-primary inline-block px-2">
+        <div className="bg-accent/10 text-xl text-primary inline-block px-2">
           VINTAGE FEED
         </div>
         <div className="flex-1 border-b border-primary ml-2"></div>
       </div>
 
-      <div className="space-y-4 flex flex-col">
+      <div className="space-y-6 flex flex-col">
         {allPosts.map((post) => (
           <PostCard key={post._id} post={post} />
         ))}

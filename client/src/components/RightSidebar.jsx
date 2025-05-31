@@ -20,28 +20,28 @@ const RightSidebar = () => {
   // Mobile menu icon 
   const MobileMenuButton = () => (
     <button
-      className="fixed top-4 right-6 z-50 cursor-pointer hover:bg-muted-foreground bg-muted-foreground/80 text-white rounded-full p-2.5 shadow-lg lg:hidden"
+      className="fixed top-4 right-6 z-50 cursor-pointer hover:bg-muted-foreground bg-muted-foreground/80 text-white rounded-full p-3 shadow-lg xl:hidden"
       onClick={() => setOpen(true)}
       aria-label="Open chat list"
     >
-      <RiMessage3Fill className="size-[1.64rem]" />
+      <RiMessage3Fill className="size-[1.70rem]" />
     </button>
   );
 
   // Sidebar content
   const SidebarContent = () => (
-    <div className="flex flex-col transition-all h-full md:h-[calc(100vh-2.3rem)] duration-200 max-w-md w-full mx-auto border-l-2 border-primary/20 bg-background/80 shadow-vintage ">
+    <div className="flex flex-col transition-all h-full md:h-[calc(100vh-3.2rem)] duration-200 max-w-md w-full mx-auto border-l-2 border-primary/20 bg-background/80 shadow-vintage ">
       {/* Header */}
       <div className="border-b border-primary/30 w-full py-4 px-[1.2rem] bg-[#8c7a64d5] shadow-sm sticky top-0 z-10 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <RiMessage3Fill className="size-7 text-muted" />
-          <span className="font-medium font-newspaper text-muted text-[1.49rem] tracking-wide">
+          <RiMessage3Fill className="size-8 md:size-9 text-muted" />
+          <span className="font-medium font-newspaper text-muted text-[1.89rem] tracking-wide">
             Chat
           </span>
         </div>
         {/* Close button for overlay */}
         <button
-          className="lg:hidden cursor-pointer hover:text-white text-muted "
+          className="xl:hidden cursor-pointer hover:text-white text-muted "
           onClick={() => setOpen(false)}
           aria-label="Close chat list"
         >
@@ -71,7 +71,7 @@ const RightSidebar = () => {
                   navigate("/messages");
                   setOpen(false); 
                 }}
-                className={`w-full px-4 py-3 flex items-center gap-4 rounded-lg transition-all
+                className={`w-full px-4 py-[0.95rem] flex items-center gap-4 rounded-lg transition-all
                   ${
                     selectedUser?._id === user?._id
                       ? "bg-primary/20 ring-2 ring-primary/60 shadow"
@@ -85,16 +85,16 @@ const RightSidebar = () => {
                     <img
                       src={user.profile_picture}
                       alt={user.name || "Profile"}
-                      className="object-cover size-10 rounded-full border-2 border-primary/30 shadow"
+                      className="object-cover size-10 md:size-13 rounded-full border-2 border-primary/30 shadow"
                     />
                   ) : (
-                    <div className="rounded-full size-10 flex font-typewriter items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20 text-primary font-bold text-xl border-2 border-primary/30 shadow">
+                    <div className="rounded-full size-10 md:size-13 flex font-typewriter items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20 text-primary font-bold text-xl border-2 border-primary/30 shadow">
                       {user.username?.charAt(0).toUpperCase() || "?"}
                     </div>
                   )}
                 </div>
                 <div className="flex flex-col items-start">
-                  <span className="text-base font-newspaper text-primary/90">
+                  <span className="text-lg font-newspaper text-start text-primary/90">
                     {user.name || user.username || "Vintage User"}
                   </span>
                   <span className="text-xs text-muted-foreground font-typewriter">
@@ -126,7 +126,7 @@ const RightSidebar = () => {
 
       {/* Overlay for mobile */}
       {open && (
-        <div className="fixed inset-0 z-50 flex justify-end lg:hidden">
+        <div className="fixed inset-0 z-50 flex justify-end xl:hidden">
           <div className="w-64 max-w-[80vw] h-full bg-background shadow-lg animate-slideInRight relative">
             <SidebarContent />
           </div>
@@ -139,7 +139,7 @@ const RightSidebar = () => {
       )}
 
       {/* Desktop sidebar */}
-      <aside className="hidden z-50 lg:flex flex-col transition-all h-[calc(100vh-2.3rem)] duration-200 max-w-md w-full mx-auto border-l-2 border-primary/20 bg-background/80 shadow-vintage ">
+      <aside className="hidden z-50 xl:flex flex-col transition-all h-full md:h-[calc(100vh-3.2rem)] duration-200 max-w-md w-full mx-auto border-l-2 border-primary/20 bg-background/80 shadow-vintage ">
         <SidebarContent />
       </aside>
     </>

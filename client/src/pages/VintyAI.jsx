@@ -96,9 +96,9 @@ function VintyAI() {
 
   return (
     <Layout>
-      <div className="flex flex-col items-center justify-center ">
+      <div className="flex flex-col items-center justify-center gap-2">
         {/* Chat Header */}
-        <div className="flex items-center gap-3 md:gap-4 bg-white/80 rounded-xl shadow-md shadow-muted px-4 md:px-5 py-2 md:py-3 mb-4">
+        <div className="flex items-center gap-3 md:gap-4 bg-white/80 rounded-xl shadow-md shadow-muted px-4 md:px-5 py-2 md:py-3 my-4">
           <img
             src="/images/vinty.png"
             alt="Vinty"
@@ -116,8 +116,8 @@ function VintyAI() {
 
         {/* Chat Window */}
         <div
-          className="w-full max-w-lg bg-white/80 rounded-xl shadow-lg flex
-         flex-col p-4 h-[25rem] overflow-y-auto mb-4 border-3 border-primary/40
+          className="w-full max-w-2xl bg-white/80 rounded-xl shadow-lg flex
+         flex-col p-4 h-[30rem] xl:h-[34rem] overflow-y-auto mb-4 border-3 border-primary/40
            [&::-webkit-scrollbar]:w-2 scroll-smooth
           [&::-webkit-scrollbar-track]:rounded-xl
           [&::-webkit-scrollbar-track]:bg-muted
@@ -133,7 +133,7 @@ function VintyAI() {
               } mb-2`}
             >
               <div
-                className={`px-4 py-2 rounded-2xl max-w-[80%] font-typewriter text-sm md:text-base whitespace-pre-line ${
+                className={`px-4 py-2 rounded-2xl max-w-[80%] font-typewriter text-sm md:text-[1.0.7rem] whitespace-pre-line ${
                   msg.role === "user"
                     ? "bg-primary text-white rounded-br-none"
                     : "bg-[#f7e7d7] text-primary rounded-bl-none"
@@ -154,7 +154,7 @@ function VintyAI() {
         </div>
 
         {/* Input Area */}
-        <div className="w-full max-w-lg flex items-center gap-1 md:gap-2 bg-white/90 rounded-xl shadow px-1.5 md:px-3 py-2 border-3 border-primary/50">
+        <div className="w-full max-w-2xl flex items-center gap-1 md:gap-2 bg-white/90 rounded-xl shadow px-1.5 md:px-3 py-2 border-3 border-primary/50">
           <button
             className="text-primary bg-accent/25 hover:bg-accent/40 rounded-xl p-1.5 transition"
             onClick={() => setShowEmoji((v) => !v)}
@@ -194,7 +194,7 @@ function VintyAI() {
         {showEmoji && (
           <div
             ref={emojiPickerRef}
-            className="absolute bottom-20 md:bottom-28 left-[42%] -translate-x-1/2 z-50"
+            className="absolute bottom-28 left-[43%] md:left-[33%] -translate-x-1/2 z-50"
           >
             <EmojiPicker
               onEmojiClick={(emojiObject) => {

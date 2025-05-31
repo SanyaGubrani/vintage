@@ -51,7 +51,7 @@ const Auth = () => {
   });
 
   return (
-    <div className="w-full min-h-[calc(100vh-80px)] relative overflow-hidden gap-10 flex flex-col">
+    <div className="w-full min-h-[calc(100vh-80px)] relative overflow-hidden justify-between flex flex-col">
       {/* Decorative Leaves */}
       <div className="absolute sm:fixed top-0 left-0 -translate-x-1/4 -translate-y-1/3 w-72 h-72 opacity-60 z-0">
         <img
@@ -72,8 +72,8 @@ const Auth = () => {
       </div>
 
       {/* Main content */}
-      <div className="w-full max-w-6xl mx-auto py-10 md:py-5 px-4">
-        <h1 className="text-2xl md:text-4xl text-foreground/80 font-newspaper tracking-wide pb-4 md:pb-7 md:pt-3 md:mb-4 w-full text-center">
+      <div className="w-full max-w-6xl mx-auto py-10 md:py-8 px-4">
+        <h1 className="text-2xl md:text-5xl text-foreground/80 font-newspaper tracking-wide pb-4 md:pb-7 md:pt-3 md:mb-4 w-full text-center">
           VINTAGE
         </h1>
 

@@ -131,12 +131,12 @@ const PostCard = ({ post }) => {
   };
 
   return (
-    <div className="relative max-w-lg bg-accent/15 rounded-lg border shadow-md shadow-muted-foreground/40 transition-shadow">
+    <div className="relative max-w-xl bg-accent/15 rounded-lg border shadow-md shadow-muted-foreground/40 transition-shadow">
       {/* User info */}
       <div className="flex items-center gap-3 p-4 border-b border-primary/60 justify-between relative">
         <div className="flex gap-2 md:gap-3 md:flex-row flex-col justify-between w-full md:items-center items-start">
           <div className="flex gap-2 md:gap-3 items-center">
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary shrink-0">
+            <div className="md:size-11 size-9 rounded-full overflow-hidden border-2 border-primary shrink-0">
               {post.user?.profile_picture ? (
                 <img
                   src={post.user.profile_picture}
@@ -155,7 +155,7 @@ const PostCard = ({ post }) => {
             </div>
             <div className="flex-1">
               <p
-                className="font-typewriter text-sm font-bold cursor-pointer"
+                className="font-typewriter text-lg font-bold cursor-pointer"
                 onClick={handleUserProfileClick}
               >
                 {post.user?.name || post.user?.username || "Anonymous"}
@@ -264,7 +264,7 @@ const PostCard = ({ post }) => {
             </div>
           </div>
         ) : (
-          <p className="font-typewriter sm:mb-4 whitespace-pre-wrap sm:text-base text-sm">
+          <p className="font-typewriter sm:mb-4 whitespace-pre-wrap sm:text-[1.12rem] text-sm">
             {post.caption}
           </p>
         )}
