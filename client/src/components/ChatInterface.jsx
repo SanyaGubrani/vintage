@@ -38,7 +38,7 @@ const ChatInterface = () => {
   if (isMessagesLoading) return <Loader />;
 
   return (
-    <div className="flex-1 bg-background/50 border-4 rounded-sm border-[#8c7a64bd] shadow-lg shadow-vintage flex flex-col overflow-auto">
+    <div className="flex-1 mt-4 bg-background/50 border-4 rounded-sm border-[#8c7a64bd] shadow-lg shadow-vintage flex flex-col overflow-auto">
       <ChatHeader />
       <div
         className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:w-2
@@ -65,10 +65,10 @@ const ChatInterface = () => {
                     <img
                       src={messageUser.profile_picture}
                       alt="profile"
-                      className="w-10 h-10 rounded-full border-2 border-primary/30 shadow object-cover"
+                      className="size-10 md:size-11 rounded-full border-2 border-primary/30 shadow object-cover"
                     />
                   ) : (
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20 text-primary font-bold text-xl border-2 border-primary/30 shadow font-typewriter">
+                    <div className="size-10 md:size-11 rounded-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20 text-primary font-bold text-xl border-2 border-primary/30 shadow font-typewriter">
                       {messageUser.username?.charAt(0).toUpperCase() || "?"}
                     </div>
                   )}
@@ -96,7 +96,7 @@ const ChatInterface = () => {
                     />
                   )}
                   {message.message && (
-                    <p className="font-typewriter md:text-base text-sm break-words">
+                    <p className="font-typewriter md:text-lg text-sm break-words">
                       {message.message}
                     </p>
                   )}
@@ -116,10 +116,10 @@ const ChatInterface = () => {
                     <img
                       src={messageUser.profile_picture}
                       alt="profile"
-                      className="w-10 h-10 rounded-full border-2 border-primary/30 shadow object-cover"
+                      className="size-10 md:size-11 rounded-full border-2 border-primary/30 shadow object-cover"
                     />
                   ) : (
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20 text-primary font-bold text-xl border-2 border-primary/30 shadow font-typewriter">
+                    <div className="size-10 md:size-11 rounded-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20 text-primary font-bold text-xl border-2 border-primary/30 shadow font-typewriter">
                       {messageUser.username?.charAt(0).toUpperCase() || "?"}
                     </div>
                   )}

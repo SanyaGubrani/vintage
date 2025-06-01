@@ -82,7 +82,7 @@ const LeftSidebar = ({ currentUser }) => {
             <CloseIcon size={32} className="text-white" />
           </button>
         </div>
-        <div className="space-y-6 md:space-y-12 px-5 pb-4 md:py-4 z-50">
+        <div className="space-y-6 md:space-y-10 px-5 pb-4 md:py-4 z-50">
           {/* Navigation Menu */}
           <div className="bg-[#8C7A64] z-50">
             <h2 className="text-3xl font-display font-bold mb-6 text-secondary-foreground/90 text-center border-b-2 pb-2">

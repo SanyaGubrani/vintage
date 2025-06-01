@@ -51,9 +51,9 @@ const Auth = () => {
   });
 
   return (
-    <div className="w-full min-h-[calc(100vh-80px)] relative overflow-hidden justify-between flex flex-col">
+    <div className="w-full min-h-[calc(100vh-20px)] relative overflow-hidden justify-between flex flex-col">
       {/* Decorative Leaves */}
-      <div className="absolute sm:fixed top-0 left-0 -translate-x-1/4 -translate-y-1/3 w-72 h-72 opacity-60 z-0">
+      <div className="absolute sm:fixed top-0 left-0 -translate-x-1/4 -translate-y-1/3 size-72 md:size-96 opacity-60 z-0">
         <img
           src="/images/leaf.png"
           alt=""
@@ -62,7 +62,7 @@ const Auth = () => {
         />
       </div>
 
-      <div className="hidden md:block fixed bottom-0 right-0 translate-x-1/3 translate-y-1/4 w-72 h-72 opacity-60 pointer-events-none">
+      <div className="hidden md:block fixed bottom-0 right-0 translate-x-1/3 translate-y-1/4 size-96 opacity-60 pointer-events-none">
         <img
           src="/images/leaf.png"
           alt=""
@@ -73,13 +73,13 @@ const Auth = () => {
 
       {/* Main content */}
       <div className="w-full max-w-6xl mx-auto py-10 md:py-8 px-4">
-        <h1 className="text-2xl md:text-5xl text-foreground/80 font-newspaper tracking-wide pb-4 md:pb-7 md:pt-3 md:mb-4 w-full text-center">
+        <h1 className="text-2xl md:text-5xl text-foreground/80 font-newspaper tracking-wide pb-4 md:pb-7 md:pt-3 md:mb-14 w-full text-center">
           VINTAGE
         </h1>
 
-        <div className="flex flex-col-reverse px-2 md:flex-row items-center gap-4 md:gap-10 justify-between mx-auto w-full md:py-5 max-w-6xl ">
+        <div className="flex flex-col-reverse px-2 md:flex-row items-center gap-4 md:gap-10 justify-between mx-auto w-full md:py-5 max-w-7xl ">
           {/* Form Section */}
-          <div className="md:w-[75%] w-full max-w-xs sm:max-w-sm md:max-w-md rounded-2xl drop-shadow-lg  border-4 border-secondary bg-secondary/5 p-4 md:py-5 md:px-6 shadow-vintage">
+          <div className="md:w-[75%] w-full max-w-sm md:max-w-md rounded-2xl drop-shadow-lg  border-4 border-secondary bg-secondary/5 p-4 md:py-5 md:px-6 shadow-vintage">
             {/* Tab Navigation */}
             <div className="flex rounded-lg bg-muted/10 p-1 text-sm sm:text-base mb-6 border-2 border-muted/30">
               <button
@@ -397,7 +397,7 @@ const Auth = () => {
           </div>
 
           {/* Banner Image Section */}
-          <div className="w-[85%] -translate-x-2.5 md:-translate-x-0 sm:w-[75%] md:w-[75%] lg:w-[48%] mb-5 md:mb-0 transition-all duration-300 max-w-xl mx-auto md:mx-0">
+          <div className="w-[85%] -translate-x-2.5 md:-translate-x-0 sm:w-[75%] md:w-[75%] lg:w-[50%] mb-5 md:mb-0 transition-all duration-300 max-w-xl mx-auto md:mx-0">
             <picture>
               <img
                 src={banner}

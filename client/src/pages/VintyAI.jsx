@@ -96,9 +96,9 @@ function VintyAI() {
 
   return (
     <Layout>
-      <div className="flex flex-col items-center justify-center gap-2">
+      <div className="flex flex-col items-center justify-center gap-1">
         {/* Chat Header */}
-        <div className="flex items-center gap-3 md:gap-4 bg-white/80 rounded-xl shadow-md shadow-muted px-4 md:px-5 py-2 md:py-3 my-4">
+        <div className="flex items-center gap-3 md:gap-4 bg-white/60 rounded-xl shadow-md shadow-muted px-4 md:px-5 py-2 md:py-3 my-4">
           <img
             src="/images/vinty.png"
             alt="Vinty"
@@ -122,7 +122,7 @@ function VintyAI() {
           [&::-webkit-scrollbar-track]:rounded-xl
           [&::-webkit-scrollbar-track]:bg-muted
           [&::-webkit-scrollbar-thumb]:rounded-xl
-          [&::-webkit-scrollbar-thumb]:bg-[#ceb399]
+          [&::-webkit-scrollbar-thumb]:bg-[#bea38a]
           "
         >
           {messages.map((msg, idx) => (

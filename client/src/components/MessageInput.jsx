@@ -134,7 +134,7 @@ const MessageInput = () => {
                 className="p-1.5 md:p-2 rounded-md border border-primary/30 bg-muted/40 hover:bg-muted-foreground/20 transition-colors text-primary"
                 onClick={() => setShowEmojiPicker((v) => !v)}
               >
-                <Smile size={22} />
+                <Smile size={24} />
               </button>
               {showEmojiPicker && (
                 <div
@@ -161,7 +161,7 @@ const MessageInput = () => {
               onClick={() => fileInputRef.current?.click()}
               aria-label="Attach image"
             >
-              <Image size={22} />
+              <Image size={24} />
             </button>
             <input
               type="file"
@@ -174,7 +174,7 @@ const MessageInput = () => {
             <input
               ref={inputRef}
               type="text"
-              className="w-full rounded-lg border-2 border-primary/30 bg-muted/20 px-1.5 md:px-3 py-1.5 md:py-2 font-typewriter text-sm focus:outline-none focus:border-primary/60 shadow-sm"
+              className="w-full rounded-lg border-2 border-primary/30 bg-muted/20 px-1.5 md:px-3 py-1.5 md:py-2.5 font-typewriter text-sm md:text-base focus:outline-none focus:border-primary/60 shadow-sm"
               placeholder="Type a message..."
               value={text}
               onChange={(e) => setText(e.target.value)}
@@ -184,7 +184,7 @@ const MessageInput = () => {
           {/* Send Button */}
           <button
             type="submit"
-            className="p-1.5 md:p-2 size-7 md:size-9 items-center flex rounded-full bg-primary text-muted hover:bg-primary/90 transition-colors shadow-vintage disabled:opacity-70 disabled:cursor-not-allowed"
+            className="p-1.5 size-7 md:size-10 items-center flex rounded-full bg-primary text-muted hover:bg-primary/90 transition-colors shadow-vintage disabled:opacity-70 disabled:cursor-not-allowed"
             disabled={!text.trim() && !imagePreview}
             aria-label="Send message"
           >

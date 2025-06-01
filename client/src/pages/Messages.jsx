@@ -12,7 +12,7 @@ const Messages = () => {
 
   return (
     <Layout>
-      <div className="rounded-lg shadow-md w-full max-w-3xl h-[calc(100vh-10.2rem)]">
+      <div className="rounded-lg shadow-md w-full max-w-[45rem] h-[calc(100vh-13rem)]">
         <div className="flex h-full rounded-lg overflow-hidden">
           {!selectedUser ? <NoChatSelected /> : <ChatInterface />}
         </div>
