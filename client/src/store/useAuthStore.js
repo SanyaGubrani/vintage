@@ -3,7 +3,7 @@ import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
-const BASE_URL = "http://localhost:4080";
+const BASE_URL = "https://vintagestorybook.com";
 
 export const useAuthStore = create((set, get) => ({
   authUser: null, //initially we do not know if the user is authenticated or not
