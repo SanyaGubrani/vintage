@@ -1,4 +1,6 @@
-import dotenv from "dotenv";
+import dotenvFlow from "dotenv-flow";
+dotenvFlow.config();
+
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -19,14 +21,10 @@ import { app, server } from "./utils/soket.js";
 import likePostRouter from "./routes/like.route.js";
 import path from "path";
 
-const envFile =
-  process.env.NODE_ENV === "production" ? ".env.production" : ".env";
-
-const envPath = path.resolve(process.cwd(), envFile);
-dotenv.config({ path: envPath });
-
 // Configurations
 // const app = express();
+
+app.set("trust proxy", 1);
 
 app.use(express.json({ limit: "30mb" }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
@@ -46,8 +44,8 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production" ? true : false,
+      sameSite: "none",
       maxAge: 24 * 60 * 60 * 1000,
     },
   })

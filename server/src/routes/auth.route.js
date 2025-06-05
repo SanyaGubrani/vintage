@@ -6,8 +6,8 @@ import {
 } from "../controllers/auth.controller.js";
 import { isAuthenticated } from "../middlewares/auth.middleware.js";
 import passport from "passport";
-import dotenv from "dotenv";
-dotenv.config();
+import dotenvFlow from "dotenv-flow";
+dotenvFlow.config();
 
 const router = Router();
 

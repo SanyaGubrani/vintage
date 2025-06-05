@@ -1,8 +1,8 @@
 import { app } from "./app.js";
 import { server } from "./utils/soket.js";
 import connectDb from "./db/connectDb.js";
-import dotenv from "dotenv";
-dotenv.config();
+import dotenvFlow from "dotenv-flow";
+dotenvFlow.config();
 
 connectDb()
   .then(() => {

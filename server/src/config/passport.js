@@ -2,8 +2,8 @@ import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as LocalStrategy } from "passport-local";
 import { User } from "../models/user.model.js";
-import dotenv from "dotenv";
-dotenv.config();
+import dotenvFlow from "dotenv-flow";
+dotenvFlow.config();
 
 // Local Strategy
 passport.use(
@@ -93,16 +93,46 @@ passport.use(
 
 // Serialize user for session
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  console.log(
+    "PASSPORT_SERIALIZE: Attempting to serialize user:",
+    user
+      ? { id: user.id || user._id, username: user.username }
+      : "User object is undefined/null"
+  );
+  if (!user || !(user.id || user._id)) {
+    console.error(
+      "PASSPORT_SERIALIZE: User or user ID is missing for serialization!"
+    );
+    return done(new Error("User or user ID missing for serialization"), null);
+  }
+  const userIdToStore = user.id || user._id;
+  console.log(
+    "PASSPORT_SERIALIZE: Calling done(null, userId) with ID:",
+    userIdToStore
+  );
+  done(null, userIdToStore);
 });
 
 // Deserialize user from session
 passport.deserializeUser(async (id, done) => {
+  console.log(
+    "PASSPORT_DESERIALIZE: Attempting to deserialize user with ID:",
+    id
+  );
   try {
     const user = await User.findById(id);
+    if (!user) {
+      console.error("PASSPORT_DESERIALIZE: User not found for ID:", id);
+      return done(null, false, { message: "User not found." });
+    }
+    console.log("PASSPORT_DESERIALIZE: User found:", {
+      id: user.id || user._id,
+      username: user.username,
+    });
     done(null, user);
-  } catch (error) {
-    done(error);
+  } catch (err) {
+    console.error("PASSPORT_DESERIALIZE: Error fetching user by ID:", id, err);
+    done(err, null);
   }
 });
 
