@@ -31,12 +31,12 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/vintage:client
-            
+
       - name: Build and push Backend image
         uses: docker/build-push-action@v5
         with:
-          context: ./backend 
-          file: ./backend/Dockerfile 
+          context: ./server 
+          file: ./server/Dockerfile 
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/vintage:server
