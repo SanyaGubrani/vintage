@@ -65,8 +65,4 @@ jobs:
             echo "Restarting Docker Compose services..."
             docker compose up -d --force-recreate frontend backend nginx certbot
 
-            echo "Cleaning up old Docker images and containers..."
-            docker image prune -af  true 
-            docker container prune -f  true 
-
             echo "Deployment successful!"
