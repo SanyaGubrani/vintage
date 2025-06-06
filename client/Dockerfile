@@ -1,6 +1,14 @@
 FROM node:20 AS build
 
+# Define a build argument to receive the content of ai-instructions.js
+ARG AI_INSTRUCTIONS_CONTENT 
+
 WORKDIR /app
+
+# Ensure the /app/src/lib directory exists 
+RUN mkdir -p src/lib 
+
+RUN echo "$AI_INSTRUCTIONS_CONTENT" > src/lib/ai-instructions.js 
 
 COPY package*.json ./
 

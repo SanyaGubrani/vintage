@@ -31,7 +31,8 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/vintage:client
-         
+          build-args: |
+            AI_INSTRUCTIONS_CONTENT=${{ secrets.AI_INSTRUCTIONS_CONTENT }} 
 
       - name: Build and push Backend image
         uses: docker/build-push-action@v5
