@@ -38,6 +38,9 @@ jobs:
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/vintage:client-${{ steps.vars.outputs.sha_short }}
             ${{ secrets.DOCKER_USERNAME }}/vintage:client-latest
+          build-args: |
+            VITE_API_URL=${{ secrets.VITE_API_URL }}
+            VITE_GEMINI_API_KEY=${{ secrets.VITE_GEMINI_API_KEY }}
 
       - name: Build and push Backend image
         uses: docker/build-push-action@v5
@@ -63,24 +66,15 @@ jobs:
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           port: 22 
           script: |
-            set -e # Exit immediately if a command exits with a non-zero status.
+            set -e
             APP_PATH="${{ secrets.EC2_APP_PATH }}"
             DOCKER_USERNAME="${{ secrets.DOCKER_USERNAME }}"
             COMMIT_SHA="${{ needs.build-and-push.outputs.commit_sha_short }}"
-            echo "Navigating to app directory $APP_PATH"
+            if [ -z "$COMMIT_SHA" ]; then echo "ERROR: Commit SHA is empty." >&2; exit 1; fi
             cd $APP_PATH
-      
-            echo "Updating docker-compose.yml with new image tags..."
             sed -i "s|image: ${DOCKER_USERNAME}/vintage:client.*|image: ${DOCKER_USERNAME}/vintage:client-${COMMIT_SHA}|g" docker-compose.yml
             sed -i "s|image: ${DOCKER_USERNAME}/vintage:server.*|image: ${DOCKER_USERNAME}/vintage:server-${COMMIT_SHA}|g" docker-compose.yml
-            
-            echo "Pulling latest Docker images..."
             docker compose pull frontend backend
-
-            echo "Restarting Docker Compose services with new images..."
             docker compose up -d --force-recreate frontend backend nginx certbot
-
-            echo "Cleaning up old, unused Docker images..."
             docker image prune -af
-
             echo "Deployment successful!"
