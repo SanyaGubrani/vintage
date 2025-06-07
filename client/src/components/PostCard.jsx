@@ -131,12 +131,12 @@ const PostCard = ({ post }) => {
   };
 
   return (
-    <div className="relative max-w-xl bg-accent/15 rounded-lg border shadow-md shadow-muted-foreground/40 transition-shadow">
+    <div className="relative w-full max-w-2xl my-3 backdrop-brightness-[105%]  border-primary/50 rounded-lg border-3 shadow-md shadow-muted-foreground/40 transition-shadow">
       {/* User info */}
       <div className="flex items-center gap-3 p-4 border-b border-primary/60 justify-between relative">
-        <div className="flex gap-2 md:gap-3 md:flex-row flex-col justify-between w-full md:items-center items-start">
+        <div className="flex gap-2 md:gap-3 sm:flex-row flex-col justify-between w-full sm:items-center items-start">
           <div className="flex gap-2 md:gap-3 items-center">
-            <div className="md:size-11 size-9 rounded-full overflow-hidden border-2 border-primary shrink-0">
+            <div className="md:size-12 size-10 rounded-full overflow-hidden border-2 border-primary shrink-0">
               {post.user?.profile_picture ? (
                 <img
                   src={post.user.profile_picture}
@@ -160,12 +160,12 @@ const PostCard = ({ post }) => {
               >
                 {post.user?.name || post.user?.username || "Anonymous"}
               </p>
-              <p className="text-muted-foreground text-xs">
+              <p className="text-muted-foreground">
                 @{post.user?.username || "anonymous"}
               </p>
             </div>
           </div>
-          <div className="text-xs text-muted-foreground font-typewriter">
+          <div className="text-sm text-muted-foreground font-typewriter">
             {new Date(post.createdAt).toLocaleString(undefined, {
               dateStyle: "medium",
               timeStyle: "short",
@@ -189,29 +189,29 @@ const PostCard = ({ post }) => {
             </button>
 
             {isEditOpen && (
-              <div className="absolute z-10 right-0 md:right-2 top-full w-32 rounded-md border-2 border-primary/40 bg-accent/15 backdrop-blur-sm shadow-vintage overflow-hidden">
+              <div className="absolute z-10 right-0 md:right-2 top-full w-32 rounded-md border-2 border-primary/60 bg-accent/20 backdrop-blur-sm shadow-vintage overflow-hidden">
                 <div className="bg-gradient-to-b from-secondary to-muted py-1 px-1">
                   <button
-                    className="flex w-full cursor-pointer items-center gap-2 py-1.5 px-2 text-sm font-typewriter hover:bg-primary/10 rounded transition-colors text-left"
+                    className="flex w-full cursor-pointer items-center gap-2 text-lg py-1.5 px-2 font-typewriter hover:bg-primary/10 rounded transition-colors text-left"
                     onClick={handleEditClick}
                     disabled={isEditing}
                   >
-                    <Edit size={16} />
+                    <Edit size={18} />
                     <span>Edit</span>
                   </button>
                   <button
                     onClick={handleDeletePost}
                     disabled={isDeleting}
-                    className="flex w-full cursor-pointer items-center gap-2 py-1.5 px-2 text-sm font-typewriter hover:bg-destructive/10 text-destructive font-medium rounded transition-colors text-left"
+                    className="flex w-full cursor-pointer items-center gap-2 text-lg py-1.5 px-2 font-typewriter hover:bg-destructive/10 text-destructive font-medium rounded transition-colors text-left"
                   >
                     {isDeleting ? (
                       <>
-                        <Loader2 size={16} className="animate-spin" />
+                        <Loader2 size={18} className="animate-spin" />
                         <span>Deleting...</span>
                       </>
                     ) : (
                       <>
-                        <Trash2 size={16} />
+                        <Trash2 size={18} />
                         <span>Delete</span>
                       </>
                     )}
@@ -251,12 +251,12 @@ const PostCard = ({ post }) => {
               >
                 {isEditing ? (
                   <>
-                    <Loader2 size={14} className="animate-spin" />
+                    <Loader2 size={18} className="animate-spin" />
                     <span>Saving...</span>
                   </>
                 ) : (
                   <>
-                    <Check size={14} />
+                    <Check size={18} />
                     <span>Save</span>
                   </>
                 )}
@@ -321,9 +321,9 @@ const PostCard = ({ post }) => {
           aria-label={isSaved ? "Unsave post" : "Save post"}
         >
           {isSaved ? (
-            <BookmarkCheck size={18} className="fill-primary" />
+            <BookmarkCheck size={19} className="fill-primary" />
           ) : (
-            <Bookmark size={18} />
+            <Bookmark size={19} />
           )}
         </button>
       </div>

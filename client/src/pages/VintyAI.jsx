@@ -204,8 +204,8 @@ function VintyAI() {
               }}
               theme="light"
               emojiStyle="native"
-              width={320}
-              height={400}
+              width={300}
+              height={370}
               skinTonesDisabled
               searchDisabled
             />

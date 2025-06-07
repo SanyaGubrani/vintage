@@ -31,7 +31,7 @@ const Bookmarks = () => {
     <Layout>
       <div className="max-w-4xl w-full mx-auto px-4 py-6">
         <div className="flex items-center mb-6">
-          <div className="bg-accent/40 font-typewriter rounded-xl text-primary inline-block px-2">
+          <div className="bg-accent/20 font-semibold tracking-wide text-lg md:text-xl font-typewriter rounded-xl text-primary inline-block px-2">
             BOOKMARKED POSTS
           </div>
           <div className="flex-1 border-b border-primary ml-2"></div>
@@ -42,7 +42,7 @@ const Bookmarks = () => {
             <Loader2 className="animate-spin size-8" />
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="flex flex-col gap-2">
             {validSavedPosts.length > 0 ? (
               validSavedPosts.map((savedPost) => (
                 <PostCard 

@@ -85,7 +85,7 @@ const LeftSidebar = ({ currentUser }) => {
         <div className="space-y-6 md:space-y-10 px-5 pb-4 md:py-4 z-50">
           {/* Navigation Menu */}
           <div className="bg-[#8C7A64] z-50">
-            <h2 className="text-3xl font-display font-bold mb-6 text-secondary-foreground/90 text-center border-b-2 pb-2">
+            <h2 className="text-3xl font-display font-bold mb-6 text-background text-center border-b-2 pb-2">
               Bulletin Board
             </h2>
             <nav className="flex flex-col gap-3 md:gap-4">
@@ -99,7 +99,7 @@ const LeftSidebar = ({ currentUser }) => {
                   <div className="bg-muted-foreground/30 p-1 rounded">
                     <item.icon className="size-6 group-hover:scale-110 group-hover:text-primary transition-transform" />
                   </div>
-                  <span className="flex-1 text-[1.1rem] md:text-[1.19rem] font-typewriter">
+                  <span className="flex-1 text-[1.1rem] md:text-[1.2rem] font-typewriter">
                     {item.text}
                   </span>
                   <div className="w-2 h-2 rounded-full bg-primary/50 ring-1"></div>

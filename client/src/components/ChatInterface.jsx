@@ -38,7 +38,7 @@ const ChatInterface = () => {
   if (isMessagesLoading) return <Loader />;
 
   return (
-    <div className="flex-1 mt-4 bg-background/50 border-4 rounded-sm border-[#8c7a64bd] shadow-lg shadow-vintage flex flex-col overflow-auto">
+    <div className="flex-1 mt-4 bg-background/50 border-3 rounded-xl border-muted-foreground shadow-vintage flex flex-col overflow-auto">
       <ChatHeader />
       <div
         className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:w-2
@@ -96,12 +96,12 @@ const ChatInterface = () => {
                     />
                   )}
                   {message.message && (
-                    <p className="font-typewriter md:text-lg text-sm break-words">
+                    <p className="font-typewriter md:text-xl sm:text-sm xs:text-sm break-words">
                       {message.message}
                     </p>
                   )}
                 </div>
-                <span className="text-xs text-muted-foreground mt-1 opacity-70">
+                <span className="text-xs text-muted-foreground mt-2 opacity-70">
                   {new Date(message.createdAt).toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",

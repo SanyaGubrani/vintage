@@ -97,12 +97,12 @@ const CreatePost = () => {
   }, []);
 
   return (
-    <div className="w-full bg-accent/10 rounded-lg border-4 border-secondary-foreground/20 shadow-vintage p-2 md:p-4 my-3 md:my-6">
+    <div className="w-full md:max-w-[45rem] backdrop-brightness-[105%] rounded-xl border-3 border-primary/65 shadow-vintage p-2 md:p-4 my-3 md:my-6">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col w-full items-center justify-center gap-3 mb-4">
           <div className="flex items-center w-full justify-start mb-1 md:mb-2 gap-2">
             {/* User Avatar */}
-            <div className="md:size-12 size-9 rounded-full overflow-hidden border-2 border-primary/70 shrink-0 mt-1">
+            <div className="md:size-13 size-11 rounded-full overflow-hidden border-2 border-primary/70 shrink-0 mt-1">
               {user.profile_picture ? (
                 <img
                   src={user?.profile_picture || "/images/default-avatar.png"}
@@ -115,7 +115,7 @@ const CreatePost = () => {
                 </div>
               )}
             </div>
-            <h2 className="font-newspaper text-center text-lg text-primary/80 tracking-wide">
+            <h2 className="font-newspaper text-center text-xl md:text-[1.7rem] text-primary tracking-wide">
               Create a memory
             </h2>
           </div>
@@ -123,7 +123,7 @@ const CreatePost = () => {
           {/* Caption Input */}
           <div className="flex-1 w-full px-1">
             <textarea
-              className="w-full min-h-[140px] md:min-h-[110px] placeholder:text-sm  md:placeholder:text-base resize-none p-3 rounded-xl bg-muted/55 placeholder:text-muted-foreground/70 font-typewriter text-base focus:outline-none focus:border-primary/80 transition-colors"
+              className="w-full min-h-[140px] md:min-h-[110px] placeholder:text-base md:placeholder:text-lg resize-none p-3 rounded-xl border bg-primary/10 placeholder:text-muted-foreground/80 font-typewriter text-base md:text-lg focus:outline-none focus:border-primary/80 transition-colors"
               placeholder="Share a memory..."
               {...register("caption")}
             ></textarea>
@@ -153,11 +153,11 @@ const CreatePost = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-between mt-2 border-t-2 border-primary/20 pt-3">
+        <div className="flex items-center justify-between mt-2 border-t-2 border-primary/25 pt-3">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               {/* Add Image Button */}
-              <label className="flex items-center gap-1.5 py-1.5 px-2.5 font-medium bg-muted/30 rounded-md border border-primary/40 hover:bg-muted-foreground/20 transition-colors cursor-pointer text-sm font-typewriter">
+              <label className="flex items-center gap-1.5 py-1.5 px-2.5 font-medium bg-muted/20 rounded-md border-2 border-primary/60 hover:bg-muted-foreground/20 transition-colors cursor-pointer text-sm font-typewriter">
                 <Camera size={23} className="text-primary" />
                 {/* <span>Add Film</span> */}
                 <input
@@ -176,7 +176,7 @@ const CreatePost = () => {
               <button
                 type="button"
                 onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                className="flex items-center gap-1.5 py-1.5 px-2.5 font-medium bg-muted/30 rounded-md border border-primary/40 hover:bg-muted-foreground/20 transition-colors cursor-pointer text-sm font-typewriter"
+                className="flex items-center gap-1.5 py-1.5 px-2.5 font-medium bg-muted/20 rounded-md border-2 border-primary/60 hover:bg-muted-foreground/20 transition-colors cursor-pointer text-sm font-typewriter"
               >
                 <BsEmojiSmile size={22} className="text-primary" />
               </button>
@@ -193,8 +193,8 @@ const CreatePost = () => {
                     emojiStyle="apple"
                     skinTonesDisabled
                     searchDisabled
-                    // width={400}
-                    // height={400}
+                    width={300}
+                    height={370}
                   />
                 </div>
               )}

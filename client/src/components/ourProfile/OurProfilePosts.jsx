@@ -58,7 +58,7 @@ const OurProfilePosts = () => {
   return (
     <div>
       <div className="flex items-center mb-4">
-        <div className="bg-accent/40 font-typewriter rounded-xl text-primary inline-block px-2">
+        <div className="bg-accent/20 font-semibold tracking-wide text-lg md:text-xl font-typewriter rounded-xl text-primary inline-block px-2">
           PERSONAL ARCHIVES
         </div>
         <div className="flex-1 border-b border-primary ml-2"></div>

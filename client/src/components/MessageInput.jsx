@@ -92,7 +92,7 @@ const MessageInput = () => {
   }, [showEmojiPicker]);
 
   return (
-    <div className="p-2.5 md:p-4 w-full bg-background border-t border-primary/20">
+    <div className="p-2.5 md:p-4 w-full bg-background border-t-3 border-muted-foreground/70">
       {imagePreview && (
         <div className="mb-3 flex items-center gap-2">
           <div className="relative">
@@ -134,7 +134,7 @@ const MessageInput = () => {
                 className="p-1.5 md:p-2 rounded-md border border-primary/30 bg-muted/40 hover:bg-muted-foreground/20 transition-colors text-primary"
                 onClick={() => setShowEmojiPicker((v) => !v)}
               >
-                <Smile size={24} />
+                <Smile size={26} />
               </button>
               {showEmojiPicker && (
                 <div
@@ -145,11 +145,10 @@ const MessageInput = () => {
                     onEmojiClick={handleEmojiClick}
                     theme="light"
                     emojiStyle="native"
-                    width={320}
-                    height={400}
+                    width={300}
+                    height={370}
                     skinTonesDisabled
                     searchDisabled
-                    
                   />
                 </div>
               )}
@@ -161,7 +160,7 @@ const MessageInput = () => {
               onClick={() => fileInputRef.current?.click()}
               aria-label="Attach image"
             >
-              <Image size={24} />
+              <Image size={26} />
             </button>
             <input
               type="file"
@@ -174,7 +173,7 @@ const MessageInput = () => {
             <input
               ref={inputRef}
               type="text"
-              className="w-full rounded-lg border-2 border-primary/30 bg-muted/20 px-1.5 md:px-3 py-1.5 md:py-2.5 font-typewriter text-sm md:text-base focus:outline-none focus:border-primary/60 shadow-sm"
+              className="w-full rounded-lg border-2 border-primary/30 bg-muted/20 px-1.5 md:px-3 py-1.5 md:py-2.5 font-typewriter text-sm md:text-lg focus:outline-none focus:border-primary/60 shadow-sm"
               placeholder="Type a message..."
               value={text}
               onChange={(e) => setText(e.target.value)}
@@ -184,7 +183,7 @@ const MessageInput = () => {
           {/* Send Button */}
           <button
             type="submit"
-            className="p-1.5 size-7 md:size-10 items-center flex rounded-full bg-primary text-muted hover:bg-primary/90 transition-colors shadow-vintage disabled:opacity-70 disabled:cursor-not-allowed"
+            className="p-1.5 md:p-2.5 size-7 md:size-12 items-center flex rounded-full bg-primary text-muted hover:bg-primary/90 transition-colors shadow-vintage disabled:opacity-70 disabled:cursor-not-allowed"
             disabled={!text.trim() && !imagePreview}
             aria-label="Send message"
           >

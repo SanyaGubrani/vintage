@@ -3,7 +3,7 @@ import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
-const BASE_URL = "https://vintagestorybook.com";
+const BASE_URL = import.meta.env.VITE_SOCKET_API_URL;
 
 export const useAuthStore = create((set, get) => ({
   authUser: null, //initially we do not know if the user is authenticated or not

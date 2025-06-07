@@ -68,9 +68,8 @@ const CommentBox = ({ postId }) => {
               emojiStyle="apple"
               skinTonesDisabled
               searchDisabled
-              // width={400}
-              // height={400}
-              className=""
+              width={300}
+              height={370}
             />
           </div>
         )}

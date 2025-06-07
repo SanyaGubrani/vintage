@@ -19,7 +19,7 @@ const Footer = () => {
             </span>
             <Circle className="bg-primary/50 size-1 md:size-2.5 rounded-full border-none" />
             <a
-              href="https://github.com/your-username"
+              href="https://github.com/SanyaGubrani/vintage"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center md:text-sm text-xs hover:text-primary hover:font-semibold transition-all duration-100 ease-in-out"

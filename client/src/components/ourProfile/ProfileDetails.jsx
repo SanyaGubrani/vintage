@@ -279,7 +279,7 @@ const ProfileDetails = () => {
             {isEditing ? (
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-newspaper text-primary/90">
+                  <h3 className="text-xl md:text-2xl font-newspaper text-primary/90">
                     Edit Your Profile
                   </h3>
                 </div>
@@ -385,7 +385,7 @@ const ProfileDetails = () => {
             ) : (
               <div>
                 <div>
-                  <h3 className="text-xl md:text-2xl font-newspaper text-primary/90 mb-0.5">
+                  <h3 className="text-xl md:text-3xl font-newspaper text-primary/90 mb-0.5">
                     {user?.name || user?.username || "Vintage User"}
                   </h3>
                   <p className="text-muted-foreground text-sm font-typewriter">

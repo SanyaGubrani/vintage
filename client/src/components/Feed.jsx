@@ -58,11 +58,11 @@ const Feed = () => {
 
   return (
     <div className="">
-      <div className="flex items-center mb-4">
-        <div className="bg-accent/10 text-xl text-primary inline-block px-2">
+      <div className="flex items-center mb-5">
+        <div className="bg-accent/15 font-typewriter text-xl md:text-2xl text-primary font-semibold tracking-wide inline-block px-2">
           VINTAGE FEED
         </div>
-        <div className="flex-1 border-b border-primary ml-2"></div>
+        <div className="flex-1 border-b-1 border-primary ml-2"></div>
       </div>
 
       <div className="space-y-6 flex flex-col">
@@ -75,11 +75,11 @@ const Feed = () => {
           id="scroll-trigger"
           className="h-10 flex items-center justify-center"
         >
-          {loading && <Loader2 className="animate-spin size-10" />}
+          {loading && <Loader2 className="animate-spin size-10 text-primary" />}
         </div>
 
         {!hasMore && allPosts.length > 0 && (
-          <div className="bg-accent/10 p-6 text-center italic text-muted-foreground">
+          <div className="bg-accent/10 p-6 text-center font-typewriter italic text-muted-foreground">
             You've reached the end of Feed
           </div>
         )}
