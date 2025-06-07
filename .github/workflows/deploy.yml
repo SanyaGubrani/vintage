@@ -41,6 +41,7 @@ jobs:
           build-args: |
             VITE_API_URL=${{ secrets.VITE_API_URL }}
             VITE_GEMINI_API_KEY=${{ secrets.VITE_GEMINI_API_KEY }}
+            VITE_SOCKET_API_URL=${{ secrets.VITE_SOCKET_API_URL }}
 
       - name: Build and push Backend image
         uses: docker/build-push-action@v5
