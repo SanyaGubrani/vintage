@@ -9,10 +9,16 @@ jobs:
   build-and-push:
     name: Build and Push Docker Images
     runs-on: ubuntu-latest 
+    outputs:
+      commit_sha_short: ${{ steps.vars.outputs.sha_short }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set output variables
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD) >> $GITHUB_OUTPUT"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -30,7 +36,8 @@ jobs:
           file: ./client/Dockerfile 
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/vintage:client
+            ${{ secrets.DOCKER_USERNAME }}/vintage:client-${{ steps.vars.outputs.sha_short }}
+            ${{ secrets.DOCKER_USERNAME }}/vintage:client-latest
 
       - name: Build and push Backend image
         uses: docker/build-push-action@v5
@@ -39,7 +46,8 @@ jobs:
           file: ./server/Dockerfile 
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/vintage:server
+            ${{ secrets.DOCKER_USERNAME }}/vintage:server-${{ steps.vars.outputs.sha_short }}
+            ${{ secrets.DOCKER_USERNAME }}/vintage:server-latest
        
   deploy-to-ec2:
     name: Deploy to AWS EC2
@@ -56,13 +64,23 @@ jobs:
           port: 22 
           script: |
             set -e # Exit immediately if a command exits with a non-zero status.
-            echo "Navigating to app directory ${{ secrets.EC2_APP_PATH }}"
-            cd ${{ secrets.EC2_APP_PATH }}
+            APP_PATH="${{ secrets.EC2_APP_PATH }}"
+            DOCKER_USERNAME="${{ secrets.DOCKER_USERNAME }}"
+            COMMIT_SHA="${{ needs.build-and-push.outputs.commit_sha_short }}"
+            echo "Navigating to app directory $APP_PATH"
+            cd $APP_PATH
       
+            echo "Updating docker-compose.yml with new image tags..."
+            sed -i "s|image: ${DOCKER_USERNAME}/vintage:client.*|image: ${DOCKER_USERNAME}/vintage:client-${COMMIT_SHA}|g" docker-compose.yml
+            sed -i "s|image: ${DOCKER_USERNAME}/vintage:server.*|image: ${DOCKER_USERNAME}/vintage:server-${COMMIT_SHA}|g" docker-compose.yml
+            
             echo "Pulling latest Docker images..."
-            docker compose pull frontend backend 
+            docker compose pull frontend backend
 
-            echo "Restarting Docker Compose services..."
+            echo "Restarting Docker Compose services with new images..."
             docker compose up -d --force-recreate frontend backend nginx certbot
+
+            echo "Cleaning up old, unused Docker images..."
+            docker image prune -af
 
             echo "Deployment successful!"
