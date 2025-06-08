@@ -1,12 +1,12 @@
-# Vintage A Retro Social Media Experience
+# Vintage
 
-Vintage is a social media application that brings back old vibes. Packed with modern features like Google OAuth, real-time chat, AI integration, post interactions, bookmarks, and offers a fresh experience wrapped in retro aesthetics.
+Vintage is a social media app with a retro feel. Includes features like Google OAuth, real-time chat, AI integration, post interactions, bookmarks — all in one clean experience.
 
 ---
 
 ## Live Preview
 
-- Live Preview: [https://vintagestorybook.com](https://vintagestorybook.com)
+- [https://vintagestorybook.com](https://vintagestorybook.com)
 
 ---
 
@@ -145,12 +145,6 @@ vintage-social-app/
 ## AI Usage
 
 The app integrates Gemini AI to assist users with helpful, moderated conversations. Gemini is configured with secure instructions and API integration.
-
----
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
 
 ---
 
