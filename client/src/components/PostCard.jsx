@@ -160,7 +160,7 @@ const PostCard = ({ post }) => {
               >
                 {post.user?.name || post.user?.username || "Anonymous"}
               </p>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground -mt-1">
                 @{post.user?.username || "anonymous"}
               </p>
             </div>

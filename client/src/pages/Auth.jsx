@@ -72,8 +72,14 @@ const Auth = () => {
       </div>
 
       {/* Main content */}
-      <div className="w-full max-w-6xl mx-auto py-10 md:py-8 px-4">
-        <h1 className="text-2xl md:text-5xl text-foreground/80 font-newspaper tracking-wide pb-4 md:pb-7 md:pt-3 md:mb-14 w-full text-center">
+      <div className="w-full max-w-6xl mx-auto py-10 space-y-2 md:space-y-20 md:py-8 px-4">
+        <h1
+          className="text-center font-newspaper text-5xl md:text-6xl font-display font-semibold tracking-widest text-[#594f43]"
+          style={{
+            textShadow: "2px 2px 2px #C2B8A3, 4px 4px 0 #A59E8C",
+            letterSpacing: "0.2em",
+          }}
+        >
           VINTAGE
         </h1>
 

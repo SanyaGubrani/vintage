@@ -97,7 +97,7 @@ const CreatePost = () => {
   }, []);
 
   return (
-    <div className="w-full md:max-w-[45rem] backdrop-brightness-[105%] rounded-xl border-3 border-primary/65 shadow-vintage p-2 md:p-4 my-3 md:my-6">
+    <div className="w-full md:max-w-[45rem] backdrop-brightness-[105%] rounded-xl border-3 z-10 border-primary/65 shadow-vintage p-2 md:p-4 my-3 md:my-6">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col w-full items-center justify-center gap-3 mb-4">
           <div className="flex items-center w-full justify-start mb-1 md:mb-2 gap-2">

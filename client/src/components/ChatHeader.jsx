@@ -27,7 +27,7 @@ const ChatHeader = () => {
                 onClick={handleUserProfileClick}
               />
             ) : (
-              <div className="rounded-full size-15 border-3 border-muted flex hover:border-4 hover:border-muted transition-all duration-200 ease-out font-typewriter items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20 text-primary font-bold text-2xl shadow">
+              <div className="rounded-full size-15 border-3 border-muted flex hover:border-4 hover:border-muted transition-all duration-200 ease-out font-typewriter items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20 text-muted font-bold text-2xl shadow">
                 {selectedUser.username?.charAt(0).toUpperCase() || "?"}
               </div>
             )}
