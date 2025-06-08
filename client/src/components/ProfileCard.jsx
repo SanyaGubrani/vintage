@@ -61,7 +61,7 @@ const ProfileCard = () => {
 
       {/* name */}
       <h2 className="text-center text-xl font-typewriter-bold">
-        {user.name || "What's your name?"}
+        {user.name || user.username || "What's your name?"}
       </h2>
       {/* username */}
       <p className="text-center text-sm  font-medium text-muted-foreground font-newspaper">
@@ -70,7 +70,7 @@ const ProfileCard = () => {
       {/* bio */}
       <div className="my-2 text-center border rounded border-muted-foreground/40 mx-2 p-1 ">
         <p className="font-newspaper tracking-wide break-words !text-sm text-muted-foreground">
-          {user.bio || "Say something bout yourself, eh?"}
+          {user.bio || "Welcome to Vintage!! Say something bout yourself, eh?"}
         </p>
       </div>
       {/* edit profile */}

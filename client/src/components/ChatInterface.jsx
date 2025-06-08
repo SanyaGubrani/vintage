@@ -35,7 +35,7 @@ const ChatInterface = () => {
     }
   }, [messages]);
 
-  if (isMessagesLoading) return <Loader />;
+  if (isMessagesLoading) return <Loader className="flex items-center justify-center w-full place-self-center size-13 text-primary"/>;
 
   return (
     <div className="flex-1 mt-4 bg-background/50 border-3 rounded-xl border-muted-foreground shadow-vintage flex flex-col overflow-auto">

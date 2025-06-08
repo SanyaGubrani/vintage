@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Users, UserCheck } from "lucide-react";
+import { Users, UserCheck, Loader } from "lucide-react";
 import { useUserStore } from "../../store/useUserStore";
 import FollowButton from "../FollowButton";
 import { useFollowStore } from "../../store/useFollowStore";
@@ -68,7 +68,7 @@ const UserProfileDetails = ({ userId }) => {
 
   if (loading) {
     return (
-      <div className="h-60 flex items-center justify-center">Loading...</div>
+      <div className="h-60 flex items-center justify-center"><Loader className="size-10 text-primary animate-spin"/></div>
     );
   }
 

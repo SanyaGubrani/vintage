@@ -65,7 +65,7 @@ const CommentList = ({ postId }) => {
   if (comments.length === 0) {
     return (
       <div className="flex justify-center items-center py-8">
-        <p className="text-muted-foreground font-typewriter text-sm">
+        <p className="text-muted-foreground text-center px-2 md:px-6 font-typewriter text-lg">
           No comments yet. Be the first to comment !
         </p>
       </div>
@@ -78,7 +78,7 @@ const CommentList = ({ postId }) => {
         <div key={comment._id}>
           <div className="flex gap-3 py-4">
             <div
-              className="w-10 cursor-pointer h-10 hover:border-[3px] hover:border-primary transition-all duration-50 ease-initial rounded-full overflow-hidden border border-primary/40"
+              className="size-12 md:size-14 cursor-pointer  hover:border-[3px] hover:border-primary transition-all duration-50 ease-initial rounded-full overflow-hidden border border-primary/40"
               onClick={() => handleUserProfileClick(comment.user?._id)}
             >
               {comment.user?.profile_picture ? (
@@ -88,7 +88,7 @@ const CommentList = ({ postId }) => {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full bg-accent/20 flex items-center justify-center text-primary">
+                <div className="w-full h-full size-14 font-newspaper text-xl bg-accent/20 flex items-center justify-center text-primary">
                   {comment.user?.username?.charAt(0).toUpperCase()}
                 </div>
               )}
@@ -97,7 +97,7 @@ const CommentList = ({ postId }) => {
               <div className="flex items-center justify-between">
                 <div>
                   <p
-                    className="font-typewriter text-sm hover:text-primary font-bold cursor-pointer"
+                    className="font-typewriter text-base md:text-lg hover:text-primary font-bold cursor-pointer"
                     onClick={() => handleUserProfileClick(comment.user?._id)}
                   >
                     {comment.user?.username}
@@ -113,11 +113,11 @@ const CommentList = ({ postId }) => {
                     disabled={isDeletingComment}
                     className="text-primary/70 cursor-pointer hover:text-primary transition-colors"
                   >
-                    <Trash2 size={22} />
+                    <Trash2 size={23} />
                   </button>
                 )}
               </div>
-              <p className="text-[0.97rem] font-typewriter mt-1.5">
+              <p className="text-[0.99rem] md:text-lg font-typewriter mt-1.5">
                 {comment.comment}
               </p>
             </div>

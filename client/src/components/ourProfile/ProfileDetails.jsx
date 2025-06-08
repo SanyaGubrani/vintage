@@ -312,7 +312,7 @@ const ProfileDetails = () => {
                         {...register("username", {
                           required: "Username is required",
                         })}
-                        className="w-full p-2 xs:p-2.5 pl-7 border-2 border-primary/30 rounded bg-muted/20 font-typewriter focus:outline-none focus:border-primary/60 shadow-sm"
+                        className="w-full p-2.5 pl-7 border-2 border-primary/30 rounded bg-muted/20 font-typewriter focus:outline-none focus:border-primary/60 shadow-sm"
                         placeholder="username"
                       />
                     </div>
@@ -459,7 +459,7 @@ const ProfileDetails = () => {
       </div>
       {/* Loading indicators if any image is being uploaded */}
       {(updatingProfilePicture || updatingCoverImage) && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-100">
           <div className="bg-background p-6 rounded-lg flex flex-col items-center shadow-vintage border-2 border-primary/20">
             <Loader2 size={36} className="animate-spin text-primary" />
             <p className="mt-3 font-typewriter">
