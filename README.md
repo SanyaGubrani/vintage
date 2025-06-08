@@ -1,6 +1,6 @@
 # Vintage
 
-[https://vintagestorybook.com](Vintage) is a social media app with a retro feel. Includes features like Google OAuth, real-time chat, AI integration, post interactions, bookmarks — all in one clean experience.
+[Vintage](https://vintagestorybook.com) is a social media app with a retro feel. Includes features like Google OAuth, real-time chat, AI integration, post interactions, bookmarks — all in one clean experience.
 
 ---
 
