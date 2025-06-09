@@ -2,8 +2,6 @@
 
 [Vintage](https://vintagestorybook.com) is a social media app with a retro feel. Includes features like Google OAuth, real-time chat, AI integration, post interactions, bookmarks — all in one clean experience.
 
----
-
 ## Features
 
 - **Authentication**
@@ -24,7 +22,6 @@
 - **Cloudinary Integration**
   Upload and manage media seamlessly.
 
----
 
 ## Getting Started
 
@@ -39,7 +36,6 @@ You can run the app locally or with Docker.
 - Google Cloud credentials for OAuth
 - Docker (optional)
 
----
 
 ## 🛠️ Installation
 
@@ -103,7 +99,6 @@ App will be available at:
 Frontend: `http://localhost:5173` (default port)
 Backend: `http://localhost:4080`
 
----
 
 ## Run with Docker
 
@@ -116,7 +111,6 @@ Both `client/` and `server/` have Dockerfiles ready.
 docker compose up --build
 ```
 
----
 
 ## Folder Structure
 
@@ -135,15 +129,5 @@ vintage-social-app/
 │
 └── README.md
 ```
-
-## AI Usage
-
-The app integrates Gemini AI to assist users with helpful, moderated conversations. Gemini is configured with secure instructions and API integration.
-
----
-
-## License
-
-MIT License © Vintage
 
 
