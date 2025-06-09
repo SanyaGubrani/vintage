@@ -80,7 +80,7 @@ export const usePostStore = create((set) => ({
       }));
 
       toast.success("Post created successfully");
-      console.log("post created: ", res.data);
+      // console.log("post created: ", res.data);
     } catch (error) {
       toast.error("Error while creating a new post");
       console.log("Error while creating a post: ", error);
@@ -117,9 +117,9 @@ export const usePostStore = create((set) => ({
         caption: newCaption,
       });
 
-      console.log("Edited Post: ", res);
+      // console.log("Edited Post: ", res);
       const updatedPost = res.data.data;
-      console.log("edited post", updatedPost);
+      // console.log("edited post", updatedPost);
 
       set((state) => ({
         allPosts: state.allPosts.map((post) =>

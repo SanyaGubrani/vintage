@@ -84,7 +84,7 @@ export const useFollowStore = create((set, get) => ({
         },
       });
 
-      console.log("Followers data received:", followersData);
+      // console.log("Followers data received:", followersData);
     } catch (error) {
       console.error("Error in fetching followers:", error);
       set({ followers: { count: 0, list: [] } });
@@ -115,7 +115,7 @@ export const useFollowStore = create((set, get) => ({
         },
       });
 
-      console.log("Following data received:", followingData);
+      // console.log("Following data received:", followingData);
     } catch (error) {
       console.error("Error in fetching following:", error);
       set({ following: { count: 0, list: [] } });

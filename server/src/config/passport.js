@@ -125,10 +125,10 @@ passport.deserializeUser(async (id, done) => {
       console.error("PASSPORT_DESERIALIZE: User not found for ID:", id);
       return done(null, false, { message: "User not found." });
     }
-    console.log("PASSPORT_DESERIALIZE: User found:", {
-      id: user.id || user._id,
-      username: user.username,
-    });
+    // console.log("PASSPORT_DESERIALIZE: User found:", {
+    //   id: user.id || user._id,
+    //   username: user.username,
+    // });
     done(null, user);
   } catch (err) {
     console.error("PASSPORT_DESERIALIZE: Error fetching user by ID:", id, err);

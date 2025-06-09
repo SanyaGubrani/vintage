@@ -21,7 +21,7 @@ router
 router.get(
   "/google",
   (req, res, next) => {
-    console.log("Starting Google OAuth flow");
+    // console.log("Starting Google OAuth flow");
     next();
   },
   passport.authenticate("google", {
@@ -32,7 +32,7 @@ router.get(
 router.get(
   "/google/callback",
   (req, res, next) => {
-    console.log("Received callback from Google");
+    // console.log("Received callback from Google");
     next();
   },
   passport.authenticate("google", {
@@ -40,7 +40,7 @@ router.get(
     // successRedirect: `${process.env.CORS_ORIGIN}/`,
   }),
   (req, res) => {
-    console.log("Google authentication successful, redirecting to home");
+    // console.log("Google authentication successful, redirecting to home");
     res.redirect(`${process.env.CORS_ORIGIN}/`);
   }
 

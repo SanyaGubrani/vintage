@@ -29,7 +29,7 @@ const App = () => {
       document.referrer.includes("accounts.google.com");
 
     if (fromGoogle) {
-      console.log("Detected redirect from Google, checking auth status...");
+      // console.log("Detected redirect from Google, checking auth status...");
       checkAuth();
     }
   }, [checkAuth, location]);

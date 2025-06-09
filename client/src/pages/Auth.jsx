@@ -40,13 +40,13 @@ const Auth = () => {
 
   //submit login form
   const handleLoginSubmit = loginForm.handleSubmit((data) => {
-    console.log("Login form submitted with:", data);
+    // console.log("Login form submitted with:", data);
     loginUser(data);
   });
 
   //submit registration form
   const handleRegisterSubmit = registerForm.handleSubmit((data) => {
-    console.log("Register form submitted with:", data);
+    // console.log("Register form submitted with:", data);
     registerUser(data);
   });
 
