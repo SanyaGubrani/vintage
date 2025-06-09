@@ -133,7 +133,7 @@ function VintyAI() {
               } mb-2`}
             >
               <div
-                className={`px-4 py-2 rounded-2xl max-w-[80%] font-typewriter text-sm md:text-[1.0.7rem] whitespace-pre-line ${
+                className={`px-4 py-2 rounded-2xl max-w-[80%] font-typewriter text-sm md:text-[1.07rem] whitespace-pre-line ${
                   msg.role === "user"
                     ? "bg-primary text-white rounded-br-none"
                     : "bg-[#f7e7d7] text-primary rounded-bl-none"

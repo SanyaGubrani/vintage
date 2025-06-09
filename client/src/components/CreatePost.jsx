@@ -110,7 +110,7 @@ const CreatePost = () => {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full bg-accent/20 drop-shadow-xl flex items-center justify-center text-primary font-newspaper">
+                <div className="w-full h-full text-2xl bg-accent/20 drop-shadow-xl flex items-center justify-center text-primary font-newspaper">
                   {user.username?.charAt(0).toUpperCase() || "Vintage"}
                 </div>
               )}

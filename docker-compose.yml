@@ -1,0 +1,16 @@
+services:
+  backend:
+    build: ./server
+    container_name: backend
+    ports:
+      - "4080:4080" # backend port
+    restart: unless-stopped
+
+  frontend:
+    build: ./client
+    container_name: frontend
+    ports:
+      - "5173:5173"  # frontend port
+    restart: unless-stopped
+    depends_on:
+      - backend

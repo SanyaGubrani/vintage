@@ -70,7 +70,7 @@ const ProfileCard = () => {
       {/* bio */}
       <div className="my-2 text-center border rounded border-muted-foreground/40 mx-2 p-1 ">
         <p className="font-newspaper tracking-wide break-words !text-sm text-muted-foreground">
-          {user.bio || "Welcome to Vintage!! Say something bout yourself, eh?"}
+          {user.bio || "Welcome to Vintage! Add a little about yourself — or try editing your profile!"}
         </p>
       </div>
       {/* edit profile */}

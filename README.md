@@ -7,6 +7,12 @@
 - **Authentication**
   Supports both traditional sign-up/login and Google OAuth.
 
+- **User Profiles**
+  Edit your profile information and manage your account.
+
+- **Social Interaction**
+  Follow/unfollow users to personalize your feed and connect with others.
+
 - **Posts & Comments**
   Create, like/unlike, save, and comment on posts. Replies and interaction included.
 
@@ -17,7 +23,7 @@
   Real-time private messaging with Socket.IO.
 
 - **AI Chat Bot**
-  Gemini ai smart assistant with custom instructions for safe usage.
+  Gemini ai assistant with custom instructions.
 
 - **Cloudinary Integration**
   Upload and manage media seamlessly.
@@ -37,7 +43,7 @@ You can run the app locally or with Docker.
 - Docker (optional)
 
 
-## 🛠️ Installation
+## Installation
 
 ### 1. Clone the Repository
 
