@@ -51,7 +51,7 @@ const RightSidebar = () => {
 
       {/* User List */}
       <div
-        className="overflow-y-auto  
+        className="overflow-y-auto 
           [&::-webkit-scrollbar]:w-2
           [&::-webkit-scrollbar-track]:rounded-sm
           [&::-webkit-scrollbar-track]:bg-muted
@@ -71,7 +71,7 @@ const RightSidebar = () => {
                   navigate("/messages");
                   setOpen(false); 
                 }}
-                className={`w-full px-4 py-[0.95rem] flex items-center gap-4 rounded-lg transition-all
+                className={`w-full px-4 break-words py-[0.95rem] flex items-center gap-4 rounded-lg transition-all
                   ${
                     selectedUser?._id === user?._id
                       ? "bg-primary/20 ring-2 ring-primary/60 shadow"
@@ -80,7 +80,7 @@ const RightSidebar = () => {
                   focus:outline-none focus:ring-2 focus:ring-primary/40
                 `}
               >
-                <div className="relative">
+                <div className="relative flex shrink-0">
                   {user.profile_picture ? (
                     <img
                       src={user.profile_picture}
@@ -93,11 +93,11 @@ const RightSidebar = () => {
                     </div>
                   )}
                 </div>
-                <div className="flex flex-col items-start">
-                  <span className="text-lg font-newspaper text-start text-primary/90">
+                <div className="flex flex-col items-start min-w-0">
+                  <span className="text-lg font-newspaper break-words w-full text-start text-primary/90">
                     {user.name || user.username || "Vintage User"}
                   </span>
-                  <span className="text-xs text-muted-foreground font-typewriter">
+                  <span className="text-xs text-muted-foreground text-start font-typewriter break-all w-full">
                     @{user.username}
                   </span>
                 </div>
