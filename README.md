@@ -2,6 +2,8 @@
 
 [Vintage](https://vintagestorybook.com) is a social media app with a retro feel. Includes features like Google OAuth, real-time chat, AI integration, post interactions, bookmarks, etc.
 
+<img width="1600" height="916" alt="vintage01" src="https://github.com/user-attachments/assets/2fc3de89-5e41-431c-92e9-7b27b74658df" />
+
 ## Features
 
 - **Authentication**
@@ -136,4 +138,5 @@ vintage-social-app/
 └── README.md
 ```
 
+<img width="1600" height="900" alt="vintage02" src="https://github.com/user-attachments/assets/7f13bf14-e33b-4797-8c8b-419ead3a818a" />
 
