@@ -137,6 +137,3 @@ vintage-social-app/
 │
 └── README.md
 ```
-
-<img width="1600" height="900" alt="vintage02" src="https://github.com/user-attachments/assets/7f13bf14-e33b-4797-8c8b-419ead3a818a" />
-
